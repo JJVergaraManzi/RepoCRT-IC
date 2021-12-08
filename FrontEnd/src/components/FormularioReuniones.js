@@ -2,7 +2,7 @@ import React from 'react';
 import {Formik, Form, Field} from 'formik';
 import { TextField} from './TextField';
 
-export const FormularioReuniones = () => {
+ function FormularioReuniones (){
     return(
         <Formik
             initialValues={{
@@ -165,3 +165,4 @@ export const FormularioReuniones = () => {
     );
     
 }
+export default FormularioReuniones

@@ -1,50 +1,39 @@
-import {React,useState} from 'react';
-import {Formik, Form, Field} from 'formik';
-import { TextField} from './TextField';
+import React from "react";
+import {
+    Formik,
+    Form,
+    Field,
+  } from 'formik'
+import { TextField } from "./TextField";
 
-export const FormularioActividades = () => {
-    const [formValues, setformValues] = useState('');
-    onInputChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
-
-    onChangeDate = date => {
-        this.setState({ date });
-    };
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormValues({ ...formValues, [name]: value });
-      };
-
+function  FormularioActividades(){
     return(
+        
         <Formik
-            initialValues={{
-                ResponsableActividad:'',
-                ObjetivoEstrategico:'',
-                TipoActivAcc:'',
-                ObjectActAcc:'',
-                DescrActAcc:'',
-                PublObj:'',
-                ContraparteAct:'',
-                MecConvSel:'',
-                LugarRealizacion:'',
-                CostoTotal:'',
-                AporteDe3eros:'',
-                IndicadoresDeMedicion:'',
-                PorcentajeComprometido:'',
-                TipoVerificador:'',
-                FechaActAcc:'',
-                IdeasFuerzaComunicacion:'', 
-                MaterialDeApoyo:'', 
-            }}
-            
+        initialValues={{
+            ResponsableActividad:'',
+            ObjetivoEstrategico:'',
+            TipoActivAcc:'',
+            ObjectActAcc:'',
+            DescrActAcc:'',
+            PublObj:'',
+            ContraparteAct:'',
+            MecConvSel:'',
+            LugarRealizacion:'',
+            CostoTotal:'',
+            AporteDe3eros:'',
+            IndicadoresDeMedicion:'',
+            PorcentajeComprometido:'',
+            TipoVerificador:'',
+            FechaActAcc:'',
+            IdeasFuerzaComunicacion:'', 
+            MaterialDeApoyo:'', 
+        }}
         >
         {formik => (
             <div>
             <h1 className="my-4 font-weight-bold .display-4">Registro de Actividades</h1>
-                <Form action="" onSubmit={handleSubmit} className="formulario">
+                <Form action="POST" className="formulario">
                     <TextField 
                     label="Responsable de la Actividad" 
                     name="ResponsableActividad" 
@@ -188,7 +177,6 @@ export const FormularioActividades = () => {
             </div>
         )}
         </Formik>
-    );
-    
+    ); 
 }
 export default FormularioActividades;
