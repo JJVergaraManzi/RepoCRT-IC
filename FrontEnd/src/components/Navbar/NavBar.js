@@ -19,7 +19,7 @@ export default class NavBar extends Component {
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
                             <Link to="/FormularioActividades" className="nav-link">
-                            <img className="img-fluid w-100" src={Actividades} alt=""/>
+                            <img className="img-fluid w-100" src={Actividades} alt="Actividades" />
                             </Link>
                         </li>
                         <li className="nav-item">

@@ -1,182 +1,193 @@
-import React from "react";
-import {
-    Formik,
-    Form,
-    Field,
-  } from 'formik'
-import { TextField } from "./TextField";
+import React, {Component} from "react";
+import axios from 'axios'
+import styled from "styled-components";
 
-function  FormularioActividades(){
-    return(
-        
-        <Formik
-        initialValues={{
-            ResponsableActividad:'',
-            ObjetivoEstrategico:'',
-            TipoActivAcc:'',
-            ObjectActAcc:'',
-            DescrActAcc:'',
-            PublObj:'',
-            ContraparteAct:'',
-            MecConvSel:'',
-            LugarRealizacion:'',
-            CostoTotal:'',
-            AporteDe3eros:'',
-            IndicadoresDeMedicion:'',
-            PorcentajeComprometido:'',
-            TipoVerificador:'',
-            FechaActAcc:'',
-            IdeasFuerzaComunicacion:'', 
-            MaterialDeApoyo:'', 
-        }}
-        >
-        {formik => (
-            <div>
-            <h1 className="my-4 font-weight-bold .display-4">Registro de Actividades</h1>
-                <Form action="POST" className="formulario">
-                    <TextField 
-                    label="Responsable de la Actividad" 
-                    name="ResponsableActividad" 
-                    type="text" />
-                    <TextField 
-                    label="Modalidad" 
-                    name="ObjetivoEstrategico" 
-                    type="text" />
-                    <TextField 
-                    label="Fecha" 
-                    name="TipoActivAcc" 
-                    type="date" />
-                    <div id="my-radio-group">Tipo de convocatoria / selección</div>
-                    <div role="group" aria-labelledby="my-radio-group">
+const Styles = styled.div`
+ background: lavender;
+ padding: 20px;
+
+ h1 {
+   border-bottom: 1px solid white;
+   color: #3d3d3d;
+   font-family: sans-serif;
+   font-size: 20px;
+   font-weight: 600;
+   line-height: 24px;
+   padding: 10px;
+   text-align: center;
+ }
+
+ form {
+   background: white;
+   border: 1px solid #dedede;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+   margin: 0 auto;
+   max-width: 500px;
+   padding: 30px 50px;
+ }
+
+ input {
+   border: 1px solid #d9d9d9;
+   border-radius: 4px;
+   box-sizing: border-box;
+   padding: 10px;
+   width: 100%;
+ }
+
+ label {
+   color: #3d3d3d;
+   display: block;
+   font-family: sans-serif;
+   font-size: 14px;
+   font-weight: 500;
+   margin-bottom: 5px;
+ }
+
+ .error {
+   color: red;
+   font-family: sans-serif;
+   font-size: 12px;
+   height: 30px;
+ }
+
+ .submitButton {
+   background-color: #6976d9;
+   color: white;
+   font-family: sans-serif;
+   font-size: 14px;
+   margin: 20px 0px;
+ }
+`;
+
+export default class ActivityForms extends Component{
+    state={
+        ResponsableActividad:'',
+        ObjetivoEstr:'',
+        TipoAct:'',
+        ObjetivoAct:'',
+        DescripcionAct:'',
+        PublicoObj:'',
+        ContraparteAct:'',
+        MecanismoConv:'',
+        Lugar:'',
+        CostoTotal:'',
+        AporteSolic:'',
+        IndicadoresMed:'',
+        ProcCompr:'',
+        TipoVerific:'',
+        Fecha:'',
+        Idea:'',
+        MaterialApoyo:''
+    }
+    
+    onSubmit= async(e) =>{
+        e.preventDefault();
+        const NewActivity={
+            ResponsableActividad: this.state.ResponsableActividad,
+            ObjetivoEstr: this.state.ObjetivoEstr,
+            TipoAct: this.state.TipoAct,
+            ObjetivoAct: this.state.ObjetivoAct,
+            DescripcionAct: this.state.DescripcionAct,
+            PublicoObj: this.state.PublicoObj,
+            ContraparteAct: this.state.ContraparteAct,
+            MecanismoConv: this.state.MecanismoConv,
+            Lugar: this.state.Lugar,
+            CostoTotal: this.state.CostoTotal,
+            AporteSolic: this.state.AporteSolic,
+            IndicadoresMed: this.state.IndicadoresMed,
+            ProcCompr: this.state.ProcCompr,
+            TipoVerific: this.state.TipoVerific,
+            Fecha: this.state.Fecha,
+            Idea: this.state.Idea,
+            MaterialApoyo: this.state.MaterialApoyo
+        };
+        axios.post('http://localhost:4000/api/ActivitiesForm', NewActivity);
+        window.location.href = '/';
+    }
+    
+    onInputChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+    render(){
+        return (
+            <Styles>
+                <form >
+                    <h1>Reporte de Reuniones CRTIC</h1>
+                    <p>Favor reportar todas las reuniones correspondientes al centro.</p>
+                    <p>Favor completar todos los que apliquen para el tipo de reunión.</p>
+                    <p>Gracias por ayudar a que el CRT+IC salga adelante.</p>
+                    <label>Responsabe de Actividad</label>
+                    <input name="Responsable de Actividad"  value={this.state.ResponsableActividad}/>
                     <label>
-                            <Field type="radio" name="TipoActivAcc" value="Convocatoria pública abierta" />
-                            Convocatoria pública abierta
-                        </label>
-                        <label>
-                            <Field type="radio" name="TipoActivAcc" value="Taller" />
-                            Taller
-                        </label>
-                        <label>
-                            <Field type="radio" name="TipoActivAcc" value="Desarrollo /Planificación /Avance propio" />
-                            Desarrollo /Planificación /Avance propio
-                        </label>
-                        <label>
-                            <Field type="radio" name="TipoActivAcc" value="Festival" />
-                            Festival
-                        </label>
-                        <label>
-                            <Field type="radio" name="TipoActivAcc" value="Concierto" />
-                            Concierto
-                        </label>
-                        <label>
-                            <Field type="radio" name="TipoActivAcc" value="Seminario" />
-                            Seminario
-                        </label>
-                        <label>
-                            <Field type="radio" name="TipoActivAcc" value="Laboratorio" />
-                            Laboratorio
-                        </label>
-                        <label>
-                            <Field type="radio" name="TipoActivAcc" value="Entrenamiento" />
-                            Entrenamiento
-                        </label>
-                        <label>
-                            <Field type="radio" name="TipoActivAcc" value="otro" />
-                            Otro:
-                            <TextField label="Hora" name="TipoActivAcc" type="time" />
-                        </label>
-                    </div>
-                    <TextField 
-                    label="Hora" 
-                    name="ObjectActAcc" 
-                    type="time" />
-                    <div id="my-radio-group">Mecanismo de convocatoria / selección</div>
-                    <div role="group" aria-labelledby="my-radio-group">
+                    Objetivo Estratégico
+                    <select value={this.state.ObjetivoEstr} onChange={this.handleChange}>            
+                        <option value="Vigilar">Vigilar</option>
+                        <option value="Articular">Articular</option>
+                        <option value="Valorizar">Valorizar</option>
+                        <option value="Formar">Formar</option>
+                        <option value="Promover">Promover</option>
+                        <option value="Difundir">Difundir</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                    </label>
                     <label>
-                            <Field type="radio" name="ObjectActAcc" value="Convocatoria pública abierta" />
-                            Convocatoria pública abierta
-                        </label>
-                        <label>
-                            <Field type="radio" name="ObjectActAcc" value="Vigilar" />
-                            Vigilar
-                        </label>
-                        <label>
-                            <Field type="radio" name="ObjectActAcc" value="Articular" />
-                            Articular
-                        </label>
-                        <label>
-                            <Field type="radio" name="ObjectActAcc" value="Valorizar" />
-                            Valorizar
-                        </label>
-                        <label>
-                            <Field type="radio" name="ObjectActAcc" value="Formar" />
-                            Formar
-                        </label>
-                        <label>
-                            <Field type="radio" name="ObjectActAcc" value="Difundir" />
-                            Difundir
-                        </label>
-                        <label>
-                            <Field type="radio" name="ObjectActAcc" value="otro" />
-                            Otro:
-                            <TextField label="Hora" name="ObjectActAcc" type="time" />
-                        </label>
-                    </div>
-                    <TextField 
-                    label="Contraparte Actividad" 
-                    name="DescrActAcc" 
-                    type="text" />
-                    <TextField 
-                    label="Minuta de la Reunion" 
-                    name="PublObj" 
-                    type="text" />
-                    <TextField 
-                    label="Lugar de la realización o formato" 
-                    name="ContraparteAct" 
-                    type="text" />
-                    <TextField 
-                    label="Asistentes Invitados" 
-                    name="MecConvSel" 
-                    type="text" />
-                    <div id="my-radio-group">Mecanismo de convocatoria / selección</div>
-                    <div role="group" aria-labelledby="my-radio-group">
+                    Tipo de actividad/ acción
+                    <select value={this.state.ObjetivoEstr} onChange={this.handleChange}>            
+                        <option value="Taller">Taller</option>
+                        <option value="Desarrollo / Planificación / Avance propio">Desarrollo / Planificación / Avance propio</option>
+                        <option value="Festival">Festival</option>
+                        <option value="Concierto">Concierto</option>
+                        <option value="Seminario">Seminario</option>
+                        <option value="Difundir">Difundir</option>
+                        <option value="Laboratorio">Laboratorio</option>
+                        <option value="Entrenamiento">Entrenamiento</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                    </label>
+                    <label>Publico Objetivo</label>
+                    <input name="Publico Objetivo" value={this.state.ObjetivoEstr} />
+                    <label>Contraparte actividad</label>
+                    <input name="Contraparte actividad" value={this.state.ObjetivoEstr} />
                     <label>
-                            <Field type="radio" name="MecConvSel" value="Convocatoria pública abierta" />
-                            Convocatoria pública abierta
-                        </label>
-                        <label>
-                            <Field type="radio" name="MecConvSel" value="Postulación y selección por comité experto" />
-                            Postulación y selección por comité experto
-                        </label>
-                        <label>
-                            <Field type="radio" name="MecConvSel" value="otro" />
-                            Otro
-                        </label>
-                    </div>
-                    <TextField 
-                    label="Asistentes Presentes" 
-                    name="LugarRealizacion" 
-                    type="text" />
-                    <TextField 
-                    label="Archivo verificador" 
-                    name="VerificadorArchivo" 
-                    type="file" />
-                    <TextField 
-                    label="Ideas para" 
-                    name="IdeasParacomunicaciones" 
-                    type="text" />
-                    <TextField 
-                    label="Aporte de terceros" 
-                    name="AporteDe3eros" 
-                    type="text" />
-                    <TextField 
-                    label="Fecha de Actividad/Acción" name="FechaActAcc" type="date" />
-                    <button className="btn btn-dark mt-3" type="submit">Register</button>
-                    <button className="btn btn-danger mt-3 ml-3" type="reset">Reset</button>
-                </Form>
-            </div>
-        )}
-        </Formik>
-    ); 
+                    Mecanismo de convocatoria / selección
+                    <select value={this.state.MecanismoConv} onChange={this.handleChange}>            
+                        <option value="Convocatoria pública abierta">Convocatoria pública abierta</option>
+                        <option value="Postulación y selección por comité experto">Postulación y selección por comité experto</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                    </label>
+                    <label>Lugar de realización</label>
+                    <input name="Lugar de realización" value={this.state.Lugar}/>
+                    <label>Costo Total</label>
+                    <input name="Costo Total" value={this.state.CostoTotal}  />
+                    <label>Aporte Solicitado a 3ros</label>
+                    <input name="Aporte Solicitado a 3ros" value={this.state.AporteSolic} />
+                    <label>
+                    Indicadores de medición
+                    <select value={this.state.IndicadoresMed} onChange={this.handleChange}>            
+                        <option value="Ejecución presupuestaria">Ejecución presupuestaria</option>
+                        <option value="Cumplimiento Actividades comprometidas">Cumplimiento Actividades comprometidas</option>
+                        <option value="Cobertura territorial">Cobertura territorial</option>
+                        <option value="Incremento usuarios">Incremento usuarios</option>
+                        <option value="Satisfacción de usuarios">Satisfacción de usuarios</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                    </label>
+                    <label>Porcentaje comprometido.</label>
+                    <input name="Porcentaje comprometido." value={this.state.ObjetivoEstr} />
+                    <label>Descripción de la actividad / acción</label>
+                    <input name="Descripción de la actividad / acción" value={this.state.ObjetivoEstr} />
+                    <label>Fecha de actividad</label>
+                    <input name="Fecha de actividad" value={this.state.ObjetivoEstr} />
+                    <label>Descripción de la actividad / acción</label>
+                    <input name="Descripción de la actividad / acción" value={this.state.ObjetivoEstr} />
+                    <input type="submit" />
+                </form>
+            </Styles>
+        )
+    }
 }
-export default FormularioActividades;
