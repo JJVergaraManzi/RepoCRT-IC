@@ -115,14 +115,29 @@ export default class ActivityForms extends Component{
     render(){
         return (
             <Styles>
-                <form >
-                    <h1>Reporte de Reuniones CRTIC</h1>
-                    <p>Favor reportar todas las reuniones correspondientes al centro.</p>
-                    <p>Favor completar todos los que apliquen para el tipo de reunión.</p>
-                    <p>Gracias por ayudar a que el CRT+IC salga adelante.</p>
-                    <label>Responsabe de Actividad</label>
-                    <input name="Responsable de Actividad"  value={this.state.ResponsableActividad}/>
+                <form onSubmit={this.onSubmit}>
+                    <div>
+                        <h1>Objetivos Específicos Lineamientos CRT+IC</h1>
+                        <p>VIGILAR: </p>
+                        <p>Tendencias, oportunidades y brechas tecnológicas para la innovación creativa</p>
+                        <p>Dependiendo de la actividad hay campos opcionales que no son necesarios. Favor completar todos los que apliquen para el tipo de actividad.</p>
+                        <p>Valorar y valorizar: </p>
+                        <p>El desarrollo de proyectos creativos de base técnologica para su inserciónen el mercado</p>
+                        <p>Articular:</p>
+                        <p>A todos los actores del ecosistema de emprendimiento e innovación para generar instancia de</p>
+                        <p>desarrollo y vinculación de las industrias creativas en otros sectores.</p>
+                    </div>
+                    <label>Responsable de Actividad</label>
+                    <input 
+                    name="Responsable de 
+                    Actividad"  value={this.state.ResponsableActividad}/>
                     <label>
+                    <div>
+                        <h1>Reporte de Reuniones CRTIC</h1>
+                        <p>Favor reportar todas las actividades correspondientes al centro. Ya sean estas actividades individuales, reuniones, eventos, etc.</p>
+                        <p>Dependiendo de la actividad hay campos opcionales que no son necesarios. Favor completar todos los que apliquen para el tipo de actividad.</p>
+                        <p>Gracias por ayudar a que el CRT+IC salga adelante.</p>
+                    </div>
                     Objetivo Estratégico
                     <select value={this.state.ObjetivoEstr} onChange={this.handleChange}>            
                         <option value="Vigilar">Vigilar</option>
@@ -149,9 +164,13 @@ export default class ActivityForms extends Component{
                     </select>
                     </label>
                     <label>Publico Objetivo</label>
-                    <input name="Publico Objetivo" value={this.state.ObjetivoEstr} />
+                    <input 
+                    name="Publico Objetivo" 
+                    value={this.state.ObjetivoEstr} />
                     <label>Contraparte actividad</label>
-                    <input name="Contraparte actividad" value={this.state.ObjetivoEstr} />
+                    <input 
+                    name="Contraparte actividad" 
+                    value={this.state.ObjetivoEstr} />
                     <label>
                     Mecanismo de convocatoria / selección
                     <select value={this.state.MecanismoConv} onChange={this.handleChange}>            
@@ -161,11 +180,17 @@ export default class ActivityForms extends Component{
                     </select>
                     </label>
                     <label>Lugar de realización</label>
-                    <input name="Lugar de realización" value={this.state.Lugar}/>
+                    <input 
+                    name="Lugar de realización" 
+                    value={this.state.Lugar}/>
                     <label>Costo Total</label>
-                    <input name="Costo Total" value={this.state.CostoTotal}  />
+                    <input 
+                    name="Costo Total" 
+                    value={this.state.CostoTotal}  />
                     <label>Aporte Solicitado a 3ros</label>
-                    <input name="Aporte Solicitado a 3ros" value={this.state.AporteSolic} />
+                    <input 
+                    name="Aporte Solicitado a 3ros" 
+                    value={this.state.AporteSolic} />
                     <label>
                     Indicadores de medición
                     <select value={this.state.IndicadoresMed} onChange={this.handleChange}>            
@@ -178,14 +203,22 @@ export default class ActivityForms extends Component{
                     </select>
                     </label>
                     <label>Porcentaje comprometido.</label>
-                    <input name="Porcentaje comprometido." value={this.state.ObjetivoEstr} />
+                    <input 
+                    name="Porcentaje comprometido." 
+                    value={this.state.ObjetivoEstr} />
                     <label>Descripción de la actividad / acción</label>
-                    <input name="Descripción de la actividad / acción" value={this.state.ObjetivoEstr} />
+                    <input 
+                    name="Descripción de la actividad / acción" 
+                    value={this.state.ObjetivoEstr} />
                     <label>Fecha de actividad</label>
-                    <input name="Fecha de actividad" value={this.state.ObjetivoEstr} />
+                    <input 
+                    name="Fecha de actividad" 
+                    value={this.state.ObjetivoEstr} />
                     <label>Descripción de la actividad / acción</label>
-                    <input name="Descripción de la actividad / acción" value={this.state.ObjetivoEstr} />
-                    <input type="submit" />
+                    <input 
+                    name="Descripción de la actividad / acción" 
+                    value={this.state.ObjetivoEstr} />
+                    <input type="submit" placeholder="Enviar formulario" />
                 </form>
             </Styles>
         )
