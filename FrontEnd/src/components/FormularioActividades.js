@@ -24,7 +24,7 @@ const Styles = styled.div`
    flex-direction: column;
    justify-content: space-around;
    margin: 0 auto;
-   max-width: 500px;
+   max-width: 800px;
    padding: 30px 50px;
  }
 
@@ -117,6 +117,18 @@ export default class ActivityForms extends Component{
             <Styles>
                 <form onSubmit={this.onSubmit}>
                     <div>
+                        <h1>Reporte de Reuniones CRTIC</h1>
+                        <p>Favor reportar todas las actividades correspondientes al centro. Ya sean estas actividades individuales, reuniones, eventos, etc.</p>
+                        <p>Dependiendo de la actividad hay campos opcionales que no son necesarios. Favor completar todos los que apliquen para el tipo de actividad.</p>
+                        <p>Gracias por ayudar a que el CRT+IC salga adelante.</p>
+                    </div>
+                    <label>Responsable de Actividad</label>
+                    <input 
+                    name="Responsable de 
+                    Actividad"  value={this.state.ResponsableActividad}/>
+                    <label>
+                    
+                    <div>
                         <h1>Objetivos Específicos Lineamientos CRT+IC</h1>
                         <p>VIGILAR: </p>
                         <p>Tendencias, oportunidades y brechas tecnológicas para la innovación creativa</p>
@@ -126,17 +138,11 @@ export default class ActivityForms extends Component{
                         <p>Articular:</p>
                         <p>A todos los actores del ecosistema de emprendimiento e innovación para generar instancia de</p>
                         <p>desarrollo y vinculación de las industrias creativas en otros sectores.</p>
-                    </div>
-                    <label>Responsable de Actividad</label>
-                    <input 
-                    name="Responsable de 
-                    Actividad"  value={this.state.ResponsableActividad}/>
-                    <label>
-                    <div>
-                        <h1>Reporte de Reuniones CRTIC</h1>
-                        <p>Favor reportar todas las actividades correspondientes al centro. Ya sean estas actividades individuales, reuniones, eventos, etc.</p>
-                        <p>Dependiendo de la actividad hay campos opcionales que no son necesarios. Favor completar todos los que apliquen para el tipo de actividad.</p>
-                        <p>Gracias por ayudar a que el CRT+IC salga adelante.</p>
+                        <p>Formar capital humano avanzado:</p>
+                        <p>Para el fortalecimiento de proyectos de base tecnológica de las industrias creativas.</p>
+                        <p>Pomover y difundir: </p>
+                        <p>Los avances, reflexiones y resultados del centro para generar insumos que aporten de manera</p>
+                        <p>Contundente a las políticas públicas, la investigación académica y el desarrollo del sector privado.</p>
                     </div>
                     Objetivo Estratégico
                     <select value={this.state.ObjetivoEstr} onChange={this.handleChange}>            
@@ -202,22 +208,26 @@ export default class ActivityForms extends Component{
                         <option value="Otro">Otro</option>
                     </select>
                     </label>
-                    <label>Porcentaje comprometido.</label>
+                    <label>Porcentaje comprometido.
                     <input 
                     name="Porcentaje comprometido." 
                     value={this.state.ObjetivoEstr} />
-                    <label>Descripción de la actividad / acción</label>
+                    </label>
+                    <label>Descripción de la actividad / acción
                     <input 
                     name="Descripción de la actividad / acción" 
                     value={this.state.ObjetivoEstr} />
-                    <label>Fecha de actividad</label>
+                    </label>
+                    <label>Fecha de actividad
                     <input 
                     name="Fecha de actividad" 
                     value={this.state.ObjetivoEstr} />
-                    <label>Descripción de la actividad / acción</label>
+                    </label>
+                    <label>Descripción de la actividad / acción
                     <input 
                     name="Descripción de la actividad / acción" 
                     value={this.state.ObjetivoEstr} />
+                    </label>
                     <input type="submit" placeholder="Enviar formulario" />
                 </form>
             </Styles>
