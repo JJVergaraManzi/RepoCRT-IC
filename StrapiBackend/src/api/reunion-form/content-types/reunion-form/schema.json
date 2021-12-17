@@ -1,0 +1,71 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reunion_forms",
+  "info": {
+    "singularName": "reunion-form",
+    "pluralName": "reunion-forms",
+    "displayName": "ReunionForm",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "RFID": {
+      "type": "uid"
+    },
+    "ResponsableReunion": {
+      "type": "string"
+    },
+    "Modalidad": {
+      "type": "string"
+    },
+    "Fecha": {
+      "type": "date"
+    },
+    "Hora": {
+      "type": "time"
+    },
+    "Objetivo": {
+      "type": "string"
+    },
+    "Minuta": {
+      "type": "string"
+    },
+    "Contraparte": {
+      "type": "string"
+    },
+    "LugarOFormato": {
+      "type": "string"
+    },
+    "AsistentesInvitados": {
+      "type": "string"
+    },
+    "AsistentesPresentes": {
+      "type": "string"
+    },
+    "CompromisosCRTIC": {
+      "type": "string"
+    },
+    "CompromisosContraparte": {
+      "type": "string"
+    },
+    "VerificadorTipo": {
+      "type": "string"
+    },
+    "VerificadorArchivo": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
+    "TresIdeas": {
+      "type": "string"
+    }
+  }
+}

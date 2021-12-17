@@ -4,7 +4,7 @@ import styled from "styled-components";
 import DatePicker from 'react-datepicker';
 
 const Styles = styled.div`
- background: lavender;
+ background: #c93922;
  padding: 20px;
 
  h1 {
@@ -25,7 +25,7 @@ const Styles = styled.div`
    flex-direction: column;
    justify-content: space-around;
    margin: 0 auto;
-   max-width: 500px;
+   max-width: 800px;
    padding: 30px 50px;
  }
 
@@ -76,9 +76,8 @@ export default class ReunionForm extends Component{
         AsistentesPresentes:'',
         CompromisosCRTIC:'',
         CompromisosContraparte:'',
-        VerificadorTipo:'',
+        VerificadorTipo:null,
         VerificadorArchivo:'',
-        IdeasParacomunicaciones:'',
         TresIdeas:'', 
     }
     onSubmit= async(e) =>{

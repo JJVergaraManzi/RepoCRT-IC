@@ -1,0 +1,74 @@
+{
+  "kind": "collectionType",
+  "collectionName": "activities_forms",
+  "info": {
+    "singularName": "activities-form",
+    "pluralName": "activities-forms",
+    "displayName": "ActivitiesForm",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "ResponsableActividad": {
+      "type": "string"
+    },
+    "ObjetivoEstr": {
+      "type": "string"
+    },
+    "TipoAct": {
+      "type": "string"
+    },
+    "ObjetivoAct": {
+      "type": "string"
+    },
+    "DescripcionAct": {
+      "type": "string"
+    },
+    "PublicoObj": {
+      "type": "string"
+    },
+    "ContraparteAct": {
+      "type": "string"
+    },
+    "CostoTotal": {
+      "type": "string"
+    },
+    "IndicadoresMed": {
+      "type": "string"
+    },
+    "AporteSolic": {
+      "type": "biginteger"
+    },
+    "ProcCompr": {
+      "type": "decimal"
+    },
+    "TipoVerific": {
+      "type": "string"
+    },
+    "Fecha": {
+      "type": "date"
+    },
+    "Idea": {
+      "type": "string"
+    },
+    "MaterialApoyo": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
+    "MecanismoConv": {
+      "type": "string"
+    },
+    "lugar": {
+      "type": "string"
+    }
+  }
+}

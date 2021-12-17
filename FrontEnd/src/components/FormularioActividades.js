@@ -3,7 +3,7 @@ import axios from 'axios'
 import styled from "styled-components";
 
 const Styles = styled.div`
- background: lavender;
+ background: #5b79c9;
  padding: 20px;
 
  h1 {
@@ -79,7 +79,7 @@ export default class ActivityForms extends Component{
         TipoVerific:'',
         Fecha:'',
         Idea:'',
-        MaterialApoyo:''
+        MaterialApoyo:null
     }
     
     onSubmit= async(e) =>{
