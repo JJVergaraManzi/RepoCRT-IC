@@ -1,6 +1,9 @@
 import React, {Component} from "react";
 import axios from 'axios'
 import styled from "styled-components";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css'
+
 
 const Styles = styled.div`
  background: #c93922;
@@ -77,7 +80,7 @@ export default class ActivityForms extends Component{
         IndicadoresMed:'',
         ProcCompr:'',
         TipoVerific:'',
-        Fecha:'',
+        Fecha:new Date(),
         Idea:'',
         MaterialApoyo:null
     }
@@ -114,7 +117,17 @@ export default class ActivityForms extends Component{
             [e.target.name]: e.target.value
         })
     }
-    
+    onChangeDate = fecha => {
+        this.setState({ fecha });
+    }
+    onFileChange = (e) =>{
+        console.log("Las reuniones: ",this.state.MaterialApoyo);
+        this.setState({
+            MaterialApoyo: e.target.files[0]
+        })
+    }
+
+
     render(){
         return (
             <Styles>
@@ -234,10 +247,9 @@ export default class ActivityForms extends Component{
                     value={this.state.ProcCompr} />
                     </label>
                     <label>Fecha de actividad
-                    <input 
-                    onChange={this.onInputChange}
-                    name="Fecha" 
-                    value={this.state.Fecha} />
+                    <DatePicker  
+                    onChange={this.onChangeDate}
+                    selected={this.state.Fecha} />
                     </label>
                     <label>Descripción de la actividad / acción
                     <input 

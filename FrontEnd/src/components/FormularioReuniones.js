@@ -116,8 +116,8 @@ export default class ReunionForm extends Component{
         })
     }
 
-    onChangeDate = date => {
-        this.setState({ date });
+    onChangeDate = fecha => {
+        this.setState({ fecha });
     }
     
     onInputChange = (e) => {
@@ -162,7 +162,6 @@ export default class ReunionForm extends Component{
                         Fecha
                         <DatePicker 
                         className="form-control" 
-                        name="Fecha" 
                         selected={this.state.Hora} 
                         onChange={this.onChangeDate} />
                         </label>
