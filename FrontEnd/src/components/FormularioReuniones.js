@@ -70,7 +70,7 @@ export default class ReunionForm extends Component{
     state={
         ResponsableReunion:'',
         Modalidad:'',
-        Fecha:'',
+        Fecha: new Date(),
         Hora:'',
         Objetivo:'',
         Minuta:'',
@@ -148,6 +148,7 @@ export default class ReunionForm extends Component{
                         <label>
                         Modalidad
                         <select 
+                        name="Modalidad" 
                         value={this.state.Modalidad}
                         onChange={this.onInputChange}>            
                             <option value="Reunion Prescencial">Reunion Prescencial</option>
@@ -161,6 +162,7 @@ export default class ReunionForm extends Component{
                         Fecha
                         <DatePicker 
                         className="form-control" 
+                        name="Fecha" 
                         selected={this.state.Hora} 
                         onChange={this.onChangeDate} />
                         </label>
@@ -177,7 +179,7 @@ export default class ReunionForm extends Component{
                         Objetivo de la reunion
                         <input 
                         label="Objetivo de la reunion" 
-                        name="Objetivo de la reunion" 
+                        name="Objetivo" 
                         value={this.state.Objetivo}
                         onChange={this.onInputChange}
                         type="text" />
@@ -186,7 +188,7 @@ export default class ReunionForm extends Component{
                         Minuta de la Reunion
                         <input 
                         label="Minuta de la Reunion" 
-                        name="Minuta de la Reunion" 
+                        name="Minuta" 
                         value={this.state.Minuta}
                         onChange={this.onInputChange}
                         type="text" />
@@ -195,7 +197,7 @@ export default class ReunionForm extends Component{
                         Contraparte actividad
                         <input 
                         label="Contraparte actividad" 
-                        name="Contraparte actividad" 
+                        name="Contraparte" 
                         value={this.state.Contraparte}
                         onChange={this.onInputChange}
                         type="text" />
@@ -204,7 +206,7 @@ export default class ReunionForm extends Component{
                         Asistentes invitados
                         <input 
                         label="Asistentes invitados" 
-                        name="Asistentes invitados" 
+                        name="AsistentesInvitados" 
                         value={this.state.AsistentesInvitados}
                         onChange={this.onInputChange}
                         type="text" />
@@ -213,7 +215,7 @@ export default class ReunionForm extends Component{
                         Asistentes presentes
                         <input 
                         label="Asistentes presentes" 
-                        name="Asistentes presentes" 
+                        name="AsistentesPresentes" 
                         value={this.state.AsistentesPresentes}
                         onChange={this.onInputChange}
                         type="text" />
@@ -222,7 +224,7 @@ export default class ReunionForm extends Component{
                         Compromisos CRT+IC
                         <input 
                         label="Compromisos CRT+IC" 
-                        name="Compromisos CRT+IC" 
+                        name="CompromisosCRTIC" 
                         value={this.state.CompromisosCRTIC}
                         onChange={this.onInputChange}
                         type="text" />
@@ -231,16 +233,17 @@ export default class ReunionForm extends Component{
                         Compromisos contraparte
                         <input 
                         label="Compromisos contraparte" 
-                        name="Compromisos contraparte" 
+                        name="CompromisosContraparte" 
                         value={this.state.CompromisosContraparte}
                         onChange={this.onInputChange}
                         type="text" />
                         </label>
                         <label>
                         Tipo de verificador
-                        <select value={this.state.VerificadorTipo} 
+                        <select 
+                        name="VerificadorTipo"
                         onChange={this.onInputChange}
-                        value={this.state.userSelected}>            
+                        value={this.state.VerificadorTipo}>            
                             <option value="Fotografías">Fotografías</option>
                             <option value="Lista de asistencia">Desarrollo / Planificación / Avance propio</option>
                             <option value="Registro de actividad">Registro de actividad</option>
@@ -253,6 +256,7 @@ export default class ReunionForm extends Component{
                         <label>
                         3 Ideas fuerza para comunicaciones
                         <input 
+                        name="TresIdeas"
                         label="3 Ideas fuerza para comunicaciones"
                         value={this.state.TresIdeas} 
                         onChange={this.onInputChange}
@@ -262,7 +266,7 @@ export default class ReunionForm extends Component{
                         Archivo Verificador
                         <input 
                         label="Archivo Verificador" 
-                        name="Archivo Verificador" 
+                        name="VerificadorArchivo" 
                         value={this.state.VerificadorArchivo}
                         onChange={this.onFileChange}
                         type="file" />

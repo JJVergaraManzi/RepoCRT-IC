@@ -128,8 +128,8 @@ export default class ActivityForms extends Component{
                     <label>Responsable de Actividad</label>
                     <input 
                     onChange={this.onInputChange}
-                    name="Responsable de 
-                    Actividad"  value={this.state.ResponsableActividad}/>
+                    name="ResponsableActividad"  
+                    value={this.state.ResponsableActividad}/>
                     
                     <div className="card">
                         <h1>Objetivos Específicos Lineamientos CRT+IC</h1>
@@ -148,7 +148,10 @@ export default class ActivityForms extends Component{
                         <p>Contundente a las políticas públicas, la investigación académica y el desarrollo del sector privado.</p>
                     </div>
                     Objetivo Estratégico
-                    <select value={this.state.ObjetivoEstr} onChange={this.onInputChange}>            
+                    <select 
+                    name="ObjetivoEstr"
+                    value={this.state.ObjetivoEstr} 
+                    onChange={this.onInputChange}>            
                         <option value="Vigilar">Vigilar</option>
                         <option value="Articular">Articular</option>
                         <option value="Valorizar">Valorizar</option>
@@ -159,7 +162,10 @@ export default class ActivityForms extends Component{
                     </select>
                     <label>
                     Tipo de actividad/ acción
-                    <select value={this.state.ObjetivoEstr} onChange={this.onInputChange}>            
+                    <select 
+                    name="TipoAct"
+                    value={this.state.TipoAct} 
+                    onChange={this.onInputChange}>            
                         <option value="Taller">Taller</option>
                         <option value="Desarrollo / Planificación / Avance propio">Desarrollo / Planificación / Avance propio</option>
                         <option value="Festival">Festival</option>
@@ -174,16 +180,19 @@ export default class ActivityForms extends Component{
                     <label>Publico Objetivo</label>
                     <input 
                     onChange={this.onInputChange}
-                    name="Publico Objetivo" 
-                    value={this.state.ObjetivoEstr} />
+                    name="PublicoObj" 
+                    value={this.state.PublicoObj} />
                     <label>Contraparte actividad</label>
                     <input 
                     onChange={this.onInputChange}
-                    name="Contraparte actividad" 
-                    value={this.state.ObjetivoEstr} />
+                    name="ContraparteAct" 
+                    value={this.state.ContraparteAct} />
                     <label>
                     Mecanismo de convocatoria / selección
-                    <select value={this.state.MecanismoConv} onChange={this.handleChange}>            
+                    <select 
+                    name="MecanismoConv"
+                    value={this.state.MecanismoConv} 
+                    onChange={this.handleChange}>            
                         <option value="Convocatoria pública abierta">Convocatoria pública abierta</option>
                         <option value="Postulación y selección por comité experto">Postulación y selección por comité experto</option>
                         <option value="Otro">Otro</option>
@@ -192,21 +201,24 @@ export default class ActivityForms extends Component{
                     <label>Lugar de realización</label>
                     <input 
                     onChange={this.onInputChange}
-                    name="Lugar de realización" 
+                    name="Lugar" 
                     value={this.state.Lugar}/>
                     <label>Costo Total</label>
                     <input 
                     onChange={this.onInputChange}
-                    name="Costo Total" 
+                    name="CostoTotal" 
                     value={this.state.CostoTotal}  />
                     <label>Aporte Solicitado a 3ros</label>
                     <input 
                     onChange={this.onInputChange}
-                    name="Aporte Solicitado a 3ros" 
+                    name="AporteSolic" 
                     value={this.state.AporteSolic} />
                     <label>
                     Indicadores de medición
-                    <select value={this.state.IndicadoresMed} onChange={this.handleChange}>            
+                    <select 
+                    name="IndicadoresMed"
+                    value={this.state.IndicadoresMed} 
+                    onChange={this.handleChange}>            
                         <option value="Ejecución presupuestaria">Ejecución presupuestaria</option>
                         <option value="Cumplimiento Actividades comprometidas">Cumplimiento Actividades comprometidas</option>
                         <option value="Cobertura territorial">Cobertura territorial</option>
@@ -218,32 +230,27 @@ export default class ActivityForms extends Component{
                     <label>Porcentaje comprometido.
                     <input 
                     onChange={this.onInputChange}
-                    name="Porcentaje comprometido." 
-                    value={this.state.ObjetivoEstr} />
-                    </label>
-                    <label>Descripción de la actividad / acción
-                    <input 
-                    onChange={this.onInputChange}
-                    name="Descripción de la actividad / acción" 
-                    value={this.state.ObjetivoEstr} />
+                    name="ProcCompr" 
+                    value={this.state.ProcCompr} />
                     </label>
                     <label>Fecha de actividad
                     <input 
                     onChange={this.onInputChange}
-                    name="Fecha de actividad" 
-                    value={this.state.ObjetivoEstr} />
+                    name="Fecha" 
+                    value={this.state.Fecha} />
                     </label>
                     <label>Descripción de la actividad / acción
                     <input 
                     onChange={this.onInputChange}
-                    name="Descripción de la actividad / acción" 
-                    value={this.state.ObjetivoEstr} />
+                    name="DescripcionAct" 
+                    value={this.state.DescripcionAct} />
                     </label>
                     <label>Material de Apoyo
                     <input 
-                    onChange={this.onInputChange}
-                    name="Descripción de la actividad / acción" 
-                    value={this.state.MaterialApoyo} />
+                    onChange={this.onFileChange}
+                    name="MaterialApoyo" 
+                    value={this.state.MaterialApoyo} 
+                    type="file" />
                     </label>
                     <input 
                     onChange={this.onInputChange}
