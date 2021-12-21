@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import CRTIC from '../../assets/crtic.jpg'
-import Actividades from '../../assets/Actividades.png'
-import Reuniones from '../../assets/Reuniones.png'
+import Actividades from '../../assets/actividades.png'
+import Reuniones from '../../assets/reuniones.png'
 
 export default class NavBar extends Component {
     render() {

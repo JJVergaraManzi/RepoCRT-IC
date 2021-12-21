@@ -3,7 +3,7 @@ import axios from 'axios'
 import styled from "styled-components";
 
 const Styles = styled.div`
- background: #5b79c9;
+ background: #c93922;
  padding: 20px;
 
  h1 {
@@ -103,15 +103,18 @@ export default class ActivityForms extends Component{
             Idea: this.state.Idea,
             MaterialApoyo: this.state.MaterialApoyo
         };
+        console.log("las actividades: ",this.state);
         axios.post('http://localhost:4000/api/ActivitiesForm', NewActivity);
         window.location.href = '/';
     }
     
     onInputChange = (e) => {
+        console.log("las actividades: ",this.state);
         this.setState({
             [e.target.name]: e.target.value
         })
     }
+    
     render(){
         return (
             <Styles>
@@ -124,11 +127,11 @@ export default class ActivityForms extends Component{
                     </div>
                     <label>Responsable de Actividad</label>
                     <input 
+                    onChange={this.onInputChange}
                     name="Responsable de 
                     Actividad"  value={this.state.ResponsableActividad}/>
-                    <label>
                     
-                    <div>
+                    <div className="card">
                         <h1>Objetivos Específicos Lineamientos CRT+IC</h1>
                         <p>VIGILAR: </p>
                         <p>Tendencias, oportunidades y brechas tecnológicas para la innovación creativa</p>
@@ -145,7 +148,7 @@ export default class ActivityForms extends Component{
                         <p>Contundente a las políticas públicas, la investigación académica y el desarrollo del sector privado.</p>
                     </div>
                     Objetivo Estratégico
-                    <select value={this.state.ObjetivoEstr} onChange={this.handleChange}>            
+                    <select value={this.state.ObjetivoEstr} onChange={this.onInputChange}>            
                         <option value="Vigilar">Vigilar</option>
                         <option value="Articular">Articular</option>
                         <option value="Valorizar">Valorizar</option>
@@ -154,10 +157,9 @@ export default class ActivityForms extends Component{
                         <option value="Difundir">Difundir</option>
                         <option value="Otro">Otro</option>
                     </select>
-                    </label>
                     <label>
                     Tipo de actividad/ acción
-                    <select value={this.state.ObjetivoEstr} onChange={this.handleChange}>            
+                    <select value={this.state.ObjetivoEstr} onChange={this.onInputChange}>            
                         <option value="Taller">Taller</option>
                         <option value="Desarrollo / Planificación / Avance propio">Desarrollo / Planificación / Avance propio</option>
                         <option value="Festival">Festival</option>
@@ -171,10 +173,12 @@ export default class ActivityForms extends Component{
                     </label>
                     <label>Publico Objetivo</label>
                     <input 
+                    onChange={this.onInputChange}
                     name="Publico Objetivo" 
                     value={this.state.ObjetivoEstr} />
                     <label>Contraparte actividad</label>
                     <input 
+                    onChange={this.onInputChange}
                     name="Contraparte actividad" 
                     value={this.state.ObjetivoEstr} />
                     <label>
@@ -187,14 +191,17 @@ export default class ActivityForms extends Component{
                     </label>
                     <label>Lugar de realización</label>
                     <input 
+                    onChange={this.onInputChange}
                     name="Lugar de realización" 
                     value={this.state.Lugar}/>
                     <label>Costo Total</label>
                     <input 
+                    onChange={this.onInputChange}
                     name="Costo Total" 
                     value={this.state.CostoTotal}  />
                     <label>Aporte Solicitado a 3ros</label>
                     <input 
+                    onChange={this.onInputChange}
                     name="Aporte Solicitado a 3ros" 
                     value={this.state.AporteSolic} />
                     <label>
@@ -210,25 +217,38 @@ export default class ActivityForms extends Component{
                     </label>
                     <label>Porcentaje comprometido.
                     <input 
+                    onChange={this.onInputChange}
                     name="Porcentaje comprometido." 
                     value={this.state.ObjetivoEstr} />
                     </label>
                     <label>Descripción de la actividad / acción
                     <input 
+                    onChange={this.onInputChange}
                     name="Descripción de la actividad / acción" 
                     value={this.state.ObjetivoEstr} />
                     </label>
                     <label>Fecha de actividad
                     <input 
+                    onChange={this.onInputChange}
                     name="Fecha de actividad" 
                     value={this.state.ObjetivoEstr} />
                     </label>
                     <label>Descripción de la actividad / acción
                     <input 
+                    onChange={this.onInputChange}
                     name="Descripción de la actividad / acción" 
                     value={this.state.ObjetivoEstr} />
                     </label>
-                    <input type="submit" placeholder="Enviar formulario" />
+                    <label>Material de Apoyo
+                    <input 
+                    onChange={this.onInputChange}
+                    name="Descripción de la actividad / acción" 
+                    value={this.state.MaterialApoyo} />
+                    </label>
+                    <input 
+                    onChange={this.onInputChange}
+                    type="submit" 
+                    placeholder="Enviar formulario" />
                 </form>
             </Styles>
         )

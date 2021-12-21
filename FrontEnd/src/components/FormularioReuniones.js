@@ -2,9 +2,10 @@ import React, {Component} from "react";
 import axios from 'axios';
 import styled from "styled-components";
 import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css'
 
 const Styles = styled.div`
- background: #c93922;
+ background: #5b79c9;
  padding: 20px;
 
  h1 {
@@ -51,6 +52,9 @@ const Styles = styled.div`
    font-family: sans-serif;
    font-size: 12px;
    height: 30px;
+ }
+ .label{
+
  }
 
  .submitButton {
@@ -100,11 +104,24 @@ export default class ReunionForm extends Component{
             IdeasParacomunicaciones:this.state.IdeasParacomunicaciones,
             TresIdeas:this.state.TresIdeas, 
         };
+        console.log("Las reuniones: ",this.state);
         axios.post('http://localhost:4000/api/ReunionForm', NewForm);
         window.location.href = '/';
     }
+
+    onFileChange = (e) =>{
+        console.log("Las reuniones: ",this.state.VerificadorArchivo);
+        this.setState({
+            VerificadorArchivo: e.target.files[0]
+        })
+    }
+
+    onChangeDate = date => {
+        this.setState({ date });
+    }
     
     onInputChange = (e) => {
+        console.log("Las reuniones: ",e.target.name);
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -124,16 +141,15 @@ export default class ReunionForm extends Component{
                         <input 
                         label="Responsable de la reunion" 
                         name="ResponsableReunion" 
-                        onChange={this.onInputChange}
                         value={this.state.ResponsableReunion}
+                        onChange={this.onInputChange}
                         type="text" />
                         </label>
                         <label>
                         Modalidad
                         <select 
-                        value={this.state.Modalidad} 
-                        onChange={this.onInputChange}
-                        value={this.state.Modalidad}>            
+                        value={this.state.Modalidad}
+                        onChange={this.onInputChange}>            
                             <option value="Reunion Prescencial">Reunion Prescencial</option>
                             <option value="Reunion Virtual (Conferencia)">Reunion Virtual (Conferencia)</option>
                             <option value="Reunion Virtual (Llamada)">Reunion Virtual (Llamada)</option>
@@ -162,8 +178,8 @@ export default class ReunionForm extends Component{
                         <input 
                         label="Objetivo de la reunion" 
                         name="Objetivo de la reunion" 
-                        onChange={this.onInputChange}
                         value={this.state.Objetivo}
+                        onChange={this.onInputChange}
                         type="text" />
                         </label>
                         <label>
@@ -171,8 +187,8 @@ export default class ReunionForm extends Component{
                         <input 
                         label="Minuta de la Reunion" 
                         name="Minuta de la Reunion" 
-                        onChange={this.onInputChange}
                         value={this.state.Minuta}
+                        onChange={this.onInputChange}
                         type="text" />
                         </label>
                         <label>
@@ -180,8 +196,8 @@ export default class ReunionForm extends Component{
                         <input 
                         label="Contraparte actividad" 
                         name="Contraparte actividad" 
-                        onChange={this.onInputChange}
                         value={this.state.Contraparte}
+                        onChange={this.onInputChange}
                         type="text" />
                         </label>
                         <label>
@@ -189,8 +205,8 @@ export default class ReunionForm extends Component{
                         <input 
                         label="Asistentes invitados" 
                         name="Asistentes invitados" 
-                        onChange={this.onInputChange}
                         value={this.state.AsistentesInvitados}
+                        onChange={this.onInputChange}
                         type="text" />
                         </label>
                         <label>
@@ -198,8 +214,8 @@ export default class ReunionForm extends Component{
                         <input 
                         label="Asistentes presentes" 
                         name="Asistentes presentes" 
-                        onChange={this.onInputChange}
                         value={this.state.AsistentesPresentes}
+                        onChange={this.onInputChange}
                         type="text" />
                         </label>
                         <label>
@@ -207,8 +223,8 @@ export default class ReunionForm extends Component{
                         <input 
                         label="Compromisos CRT+IC" 
                         name="Compromisos CRT+IC" 
-                        onChange={this.onInputChange}
                         value={this.state.CompromisosCRTIC}
+                        onChange={this.onInputChange}
                         type="text" />
                         </label>
                         <label>
@@ -216,8 +232,8 @@ export default class ReunionForm extends Component{
                         <input 
                         label="Compromisos contraparte" 
                         name="Compromisos contraparte" 
-                        onChange={this.onInputChange}
                         value={this.state.CompromisosContraparte}
+                        onChange={this.onInputChange}
                         type="text" />
                         </label>
                         <label>
@@ -237,11 +253,19 @@ export default class ReunionForm extends Component{
                         <label>
                         3 Ideas fuerza para comunicaciones
                         <input 
-                        label="3 Ideas fuerza para comunicaciones" 
-                        name="3 Ideas fuerza para comunicaciones" 
+                        label="3 Ideas fuerza para comunicaciones"
+                        value={this.state.TresIdeas} 
                         onChange={this.onInputChange}
-                        value={this.state.TresIdeas}
                         type="text" />
+                        </label>
+                        <label>
+                        Archivo Verificador
+                        <input 
+                        label="Archivo Verificador" 
+                        name="Archivo Verificador" 
+                        value={this.state.VerificadorArchivo}
+                        onChange={this.onFileChange}
+                        type="file" />
                         </label>
                         <input type="submit" />
                     </form>

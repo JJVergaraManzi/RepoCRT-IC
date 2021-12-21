@@ -1,20 +1,34 @@
 import axios from "axios";
 import React, { Component } from "react";
+import ActivityLists from "./Lists/ActivityLists";
 
 class Home extends Component {
   state= {
-    activity: [],
-    reunions: []
+    activities: [],
+    reunions: [],
+    error: null
   };
 
-  async componentDidMount(){
-    this.getActivities();
-  }
+  componentDidMount = async () => {
+    const res = await axios.get('http://localhost:1337/api/activities-forms')
+    //console.log("primer log: ", res.data.data[0].attributes)
+    this.setState({
+        activities : res.data.data
+    });
+    const aux = await axios.get('http://localhost:1337/api/reunion-forms')
+    //console.log("primer log: ", res.data.data[0].attributes)
+    this.setState({
+      reunions : res.data.data
+    });
+    console.log("primer log",this.state.activities)
+    console.log("segundo log",this.state.reunions)
+  
+  };
 
-  getActivities = async () =>{
+  /*getActivities = async () =>{
     const res= await axios.get('http://localhost:1337/api/activities-forms')
     this.setState({
-      activity : res.data
+      activities : res.data
     });
   }
 
@@ -23,35 +37,27 @@ class Home extends Component {
     this.setState({
       reunions : res.data
     });
-  }
+  }*/
 
   render() {
     return (
         <div className="container">
-          
-          <div className="row">
-            <div className="col-md-4">
-              
-            </div>
-            <div className="col-md-4">
+          <div >
             <input
               type="search"
               //value={name}
               //onChange={filter}
               className="input"
-              placeholder="Barra de filtro"/>
+              placeholder="Buscador"/>
               
             </div>
-            <div className="col-md-4">
-            {this.state.activity.map( activities =>(
-              <div className="card" key={activities.id}>
-                <p>{activities.ResponsableActividad}</p>
-                <p>{activities.ObjetivoEstr}</p>
-                <p>{activities.TipoAct}</p>
-                <p>{activities.ObjetivoAct}</p>
-                <p>{activities.DescripcionAct}</p>
-              </div>
-            ))}
+          <div className="row">
+            <div className="col-md-8">
+              
+            </div>
+            
+            <div className="col-md-8">
+              <ActivityLists lista ={this.state.activities}/>
             </div>
           </div>
         </div>

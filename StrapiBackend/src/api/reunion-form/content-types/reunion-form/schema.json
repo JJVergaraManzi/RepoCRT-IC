@@ -12,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "RFID": {
-      "type": "uid"
-    },
     "ResponsableReunion": {
       "type": "string"
     },
