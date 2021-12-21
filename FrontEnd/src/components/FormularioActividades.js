@@ -106,18 +106,20 @@ export default class ActivityForms extends Component{
             Idea: this.state.Idea,
             MaterialApoyo: this.state.MaterialApoyo
         };
-        console.log("las actividades: ",this.state);
+        console.log("las actividades: ",this.props);
         axios.post('http://localhost:4000/api/ActivitiesForm', NewActivity);
         window.location.href = '/';
     }
     
     onInputChange = (e) => {
+        console.log("las actividades: ",this.props)
         console.log("las actividades: ",this.state);
         this.setState({
             [e.target.name]: e.target.value
         })
     }
     onChangeDate = fecha => {
+        console.log("las actividades: ",this.props)
         this.setState({ fecha });
     }
     onFileChange = (e) =>{
@@ -163,7 +165,7 @@ export default class ActivityForms extends Component{
                     Objetivo Estratégico
                     <select 
                     name="ObjetivoEstr"
-                    value={this.state.ObjetivoEstr} 
+                    selected={this.state.ObjetivoEstr} 
                     onChange={this.onInputChange}>            
                         <option value="Vigilar">Vigilar</option>
                         <option value="Articular">Articular</option>
@@ -177,7 +179,7 @@ export default class ActivityForms extends Component{
                     Tipo de actividad/ acción
                     <select 
                     name="TipoAct"
-                    value={this.state.TipoAct} 
+                    selected={this.state.TipoAct} 
                     onChange={this.onInputChange}>            
                         <option value="Taller">Taller</option>
                         <option value="Desarrollo / Planificación / Avance propio">Desarrollo / Planificación / Avance propio</option>
@@ -204,7 +206,7 @@ export default class ActivityForms extends Component{
                     Mecanismo de convocatoria / selección
                     <select 
                     name="MecanismoConv"
-                    value={this.state.MecanismoConv} 
+                    selected={this.state.MecanismoConv} 
                     onChange={this.handleChange}>            
                         <option value="Convocatoria pública abierta">Convocatoria pública abierta</option>
                         <option value="Postulación y selección por comité experto">Postulación y selección por comité experto</option>
@@ -230,7 +232,7 @@ export default class ActivityForms extends Component{
                     Indicadores de medición
                     <select 
                     name="IndicadoresMed"
-                    value={this.state.IndicadoresMed} 
+                    selected={this.state.IndicadoresMed} 
                     onChange={this.handleChange}>            
                         <option value="Ejecución presupuestaria">Ejecución presupuestaria</option>
                         <option value="Cumplimiento Actividades comprometidas">Cumplimiento Actividades comprometidas</option>

@@ -57,6 +57,7 @@ class Home extends Component {
             </div>
             
             <div className="col-md-8">
+              <h5>Actividades</h5>
               <ActivityLists lista ={this.state.activities}/>
             </div>
           </div>

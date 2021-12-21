@@ -1,22 +1,30 @@
 {
-  "name": "backend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "strapi-backend",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A Strapi application",
   "scripts": {
-    "dev":"nodemon src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "devDependencies": {},
   "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "mongoose": "^6.0.14"
+    "@strapi/strapi": "4.0.0",
+    "@strapi/plugin-users-permissions": "4.0.0",
+    "@strapi/plugin-i18n": "4.0.0",
+    "sqlite3": "5.0.2"
   },
-  "devDependencies": {
-    "nodemon": "^2.0.15"
-  }
+  "author": {
+    "name": "A Strapi developer"
+  },
+  "strapi": {
+    "uuid": "6c76f674-d35e-4a75-aa94-57fd85292e5e"
+  },
+  "engines": {
+    "node": ">=12.x.x <=16.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
 }

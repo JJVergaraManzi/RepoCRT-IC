@@ -1,11 +1,20 @@
-require('dotenv').config
+'use strict';
 
-const app=require('./app');
-require('./database');
+module.exports = {
+  /**
+   * An asynchronous register function that runs before
+   * your application is initialized.
+   *
+   * This gives you an opportunity to extend code.
+   */
+  register(/*{ strapi }*/) {},
 
-function main(){
-    await app.listen(app.get('port'));
-    console.log('server on port', app.get('port'));
-}
-
-main();
+  /**
+   * An asynchronous bootstrap function that runs before
+   * your application gets started.
+   *
+   * This gives you an opportunity to set up your data model,
+   * run jobs, or perform some special logic.
+   */
+  bootstrap(/*{ strapi }*/) {},
+};

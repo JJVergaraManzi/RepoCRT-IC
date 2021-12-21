@@ -149,7 +149,7 @@ export default class ReunionForm extends Component{
                         Modalidad
                         <select 
                         name="Modalidad" 
-                        value={this.state.Modalidad}
+                        selected={this.state.Modalidad}
                         onChange={this.onInputChange}>            
                             <option value="Reunion Prescencial">Reunion Prescencial</option>
                             <option value="Reunion Virtual (Conferencia)">Reunion Virtual (Conferencia)</option>
@@ -242,7 +242,7 @@ export default class ReunionForm extends Component{
                         <select 
                         name="VerificadorTipo"
                         onChange={this.onInputChange}
-                        value={this.state.VerificadorTipo}>            
+                        selected={this.state.VerificadorTipo}>            
                             <option value="Fotografías">Fotografías</option>
                             <option value="Lista de asistencia">Desarrollo / Planificación / Avance propio</option>
                             <option value="Registro de actividad">Registro de actividad</option>
