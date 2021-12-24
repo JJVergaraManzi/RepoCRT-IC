@@ -1,6 +1,25 @@
 import axios from "axios";
 import React, { Component } from "react";
+import styled from "styled-components";
 import ActivityLists from "./Lists/ActivityLists";
+import ReunionsLists from "./Lists/ReunionLists"
+
+const Styles = styled.div`
+  .col-md-4 {
+		display: inline;
+	}
+  .form-control mr-sm-2{
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
+  }
+  .container{
+    display: flex;
+    flex-direction: row;
+  }
+  `
 
 class Home extends Component {
   state= {
@@ -18,7 +37,7 @@ class Home extends Component {
     const aux = await axios.get('http://localhost:1337/api/reunion-forms')
     //console.log("primer log: ", res.data.data[0].attributes)
     this.setState({
-      reunions : res.data.data
+      reunions : aux.data.data
     });
     console.log("primer log",this.state.activities)
     console.log("segundo log",this.state.reunions)
@@ -42,8 +61,10 @@ class Home extends Component {
   render() {
     return (
         <div className="container">
-          <div >
+          <div className="col-md-4">
             <input
+              aria-label="Search"
+              className="form-control mr-sm-2"
               type="search"
               //value={name}
               //onChange={filter}
@@ -52,11 +73,12 @@ class Home extends Component {
               
             </div>
           <div className="row">
-            <div className="col-md-8">
-              
+            <div className="col-md-4">
+            <h5>Reuniones</h5>
+            <ReunionsLists lista ={this.state.reunions}/>
             </div>
             
-            <div className="col-md-8">
+            <div className="col-md-4">
               <h5>Actividades</h5>
               <ActivityLists lista ={this.state.activities}/>
             </div>

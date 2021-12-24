@@ -67,10 +67,13 @@ const Styles = styled.div`
 `;
 
 export default class ReunionForm extends Component{    
+    componentDidMount(){
+        console.log("prueba de Formulario de Reuniones:  ", this.props)
+    }
     state={
         ResponsableReunion:'',
         Modalidad:'',
-        Fecha: new Date(),
+        Fecha: '',
         Hora:'',
         Objetivo:'',
         Minuta:'',
@@ -80,37 +83,37 @@ export default class ReunionForm extends Component{
         AsistentesPresentes:'',
         CompromisosCRTIC:'',
         CompromisosContraparte:'',
-        VerificadorTipo:null,
-        VerificadorArchivo:'',
+        VerificadorTipo:'',
+        VerificadorArchivo:null,
         TresIdeas:'', 
     }
     onSubmit= async(e) =>{
         e.preventDefault();
-        const NewForm={
-            ResponsableReunion:this.state.ResponsableReunion,
-            Modalidad:this.state.Modalidad,
-            Fecha:this.state.Fecha,
-            Hora:this.state.Hora,
-            Objetivo:this.state.Objetivo,
-            Minuta:this.state.Minuta,
-            Contraparte:this.state.Contraparte,
-            LugarOFormato:this.state.LugarOFormato,
-            AsistentesInvitados:this.state.AsistentesInvitados,
-            AsistentesPresentes:this.state.AsistentesPresentes,
-            CompromisosCRTIC:this.state.CompromisosCRTIC,
-            CompromisosContraparte:this.state.CompromisosContraparte,
-            VerificadorTipo:this.state.VerificadorTipo,
-            VerificadorArchivo:this.state.VerificadorArchivo,
-            IdeasParacomunicaciones:this.state.IdeasParacomunicaciones,
-            TresIdeas:this.state.TresIdeas, 
-        };
-        console.log("Las reuniones: ",this.state);
-        axios.post('http://localhost:4000/api/ReunionForm', NewForm);
-        window.location.href = '/';
+        const ReunionsData = new FormData();
+        const FileData =new FormData();
+        FileData.append('VerificadorArchivo', this.state.VerificadorArchivo);
+        ReunionsData.append('ResponsableReunion', this.state.ResponsableReunion);
+        ReunionsData.append('Modalidad', this.state.Modalidad);
+        ReunionsData.append('Fecha', this.state.Fecha);
+        ReunionsData.append('Hora', this.state.Hora);
+        ReunionsData.append('Objetivo', this.state.Objetivo);
+        ReunionsData.append('Minuta', this.state.Minuta);
+        ReunionsData.append('Contraparte', this.state.Contraparte);
+        ReunionsData.append('LugarOFormato', this.state.LugarOFormato);
+        ReunionsData.append('AsistentesInvitados', this.state.AsistentesInvitados);
+        ReunionsData.append('AsistentesPresentes', this.state.AsistentesPresentes);
+        ReunionsData.append('CompromisosCRTIC', this.state.CompromisosCRTIC);
+        ReunionsData.append('CompromisosContraparte', this.state.CompromisosContraparte);
+        ReunionsData.append('VerificadorTipo', this.state.VerificadorTipo);
+        ReunionsData.append('TresIdeas', this.state.TresIdeas);
+        const first_res = await axios.post("http://localhost:4000/api/FormularioReuniones",ReunionsData, {
+            headers: { 'content-type': 'multipart/form-data' }
+        }
+        )
     }
 
     onFileChange = (e) =>{
-        console.log("Las reuniones: ",this.state.VerificadorArchivo);
+        console.log("El archivo es: ",e.target.files[0]);
         this.setState({
             VerificadorArchivo: e.target.files[0]
         })
@@ -121,7 +124,7 @@ export default class ReunionForm extends Component{
     }
     
     onInputChange = (e) => {
-        console.log("Las reuniones: ",e.target.name);
+        console.log("Las reuniones: ",e.target.name ,"Con el valor: ",e.target.value);
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -139,7 +142,6 @@ export default class ReunionForm extends Component{
                         </div>
                         <label>Responsable de la reunion
                         <input 
-                        label="Responsable de la reunion" 
                         name="ResponsableReunion" 
                         value={this.state.ResponsableReunion}
                         onChange={this.onInputChange}
@@ -160,16 +162,17 @@ export default class ReunionForm extends Component{
                         </label>
                         <label>
                         Fecha
-                        <DatePicker 
-                        className="form-control" 
-                        selected={this.state.Hora} 
-                        onChange={this.onChangeDate} />
+                        <input 
+                        name="Fecha"
+                        type="date" 
+                        selected={this.state.Fecha} 
+                        onChange={this.onInputChange} />
                         </label>
                         <label>
                         Hora
                         <input 
-                        label="Hora" 
-                        name="Hora" 
+                        name="Hora"
+                        onChange={this.onInputChange} 
                         type="time" 
                         min="00:00" 
                         max="23:59" />
@@ -177,7 +180,6 @@ export default class ReunionForm extends Component{
                         <label>
                         Objetivo de la reunion
                         <input 
-                        label="Objetivo de la reunion" 
                         name="Objetivo" 
                         value={this.state.Objetivo}
                         onChange={this.onInputChange}
@@ -186,16 +188,22 @@ export default class ReunionForm extends Component{
                         <label>
                         Minuta de la Reunion
                         <input 
-                        label="Minuta de la Reunion" 
                         name="Minuta" 
                         value={this.state.Minuta}
                         onChange={this.onInputChange}
                         type="text" />
                         </label>
                         <label>
+                        Lugar o Formato
+                        <input  
+                        name="LugarOFormato" 
+                        value={this.state.LugarOFormato}
+                        onChange={this.onInputChange}
+                        type="text" />
+                        </label>
+                        <label>
                         Contraparte actividad
                         <input 
-                        label="Contraparte actividad" 
                         name="Contraparte" 
                         value={this.state.Contraparte}
                         onChange={this.onInputChange}
@@ -204,7 +212,6 @@ export default class ReunionForm extends Component{
                         <label>
                         Asistentes invitados
                         <input 
-                        label="Asistentes invitados" 
                         name="AsistentesInvitados" 
                         value={this.state.AsistentesInvitados}
                         onChange={this.onInputChange}
@@ -213,7 +220,6 @@ export default class ReunionForm extends Component{
                         <label>
                         Asistentes presentes
                         <input 
-                        label="Asistentes presentes" 
                         name="AsistentesPresentes" 
                         value={this.state.AsistentesPresentes}
                         onChange={this.onInputChange}
@@ -222,7 +228,6 @@ export default class ReunionForm extends Component{
                         <label>
                         Compromisos CRT+IC
                         <input 
-                        label="Compromisos CRT+IC" 
                         name="CompromisosCRTIC" 
                         value={this.state.CompromisosCRTIC}
                         onChange={this.onInputChange}
@@ -231,7 +236,6 @@ export default class ReunionForm extends Component{
                         <label>
                         Compromisos contraparte
                         <input 
-                        label="Compromisos contraparte" 
                         name="CompromisosContraparte" 
                         value={this.state.CompromisosContraparte}
                         onChange={this.onInputChange}
@@ -256,21 +260,22 @@ export default class ReunionForm extends Component{
                         3 Ideas fuerza para comunicaciones
                         <input 
                         name="TresIdeas"
-                        label="3 Ideas fuerza para comunicaciones"
                         value={this.state.TresIdeas} 
                         onChange={this.onInputChange}
                         type="text" />
                         </label>
                         <label>
                         Archivo Verificador
-                        <input 
-                        label="Archivo Verificador" 
+                        <input  
                         name="VerificadorArchivo" 
-                        value={this.state.VerificadorArchivo}
                         onChange={this.onFileChange}
                         type="file" />
                         </label>
-                        <input type="submit" />
+                        <button 
+                        className="submitButton"
+                        type="submit" >
+                        Ingresar Reunion
+                        </button>
                     </form>
                 </div>
             </Styles>
