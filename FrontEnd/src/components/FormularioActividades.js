@@ -89,9 +89,13 @@ export default class ActivityForms extends Component{
         TipoVerific:'',
         Fecha:null,
         TipoAct:'',
+        ideasfuerzacomunicaciones:''
         //MaterialApoyo:null
     }
-    
+    handleFile = (file) => {
+        console.log("f", file);
+        this.setState({file: file})
+    }
     onSubmit= async(e) =>{
         e.preventDefault();
         const NewActivity={
@@ -109,7 +113,8 @@ export default class ActivityForms extends Component{
             tipoverific: this.state.TipoVerific,
             fecha: this.state.Fecha,
             tipoact: this.state.TipoAct,
-            MaterialApoyo: this.state.MaterialApoyo
+            MaterialApoyo: this.state.MaterialApoyo,
+            ideasfuerzacomunicaciones:this.state.ideasfuerzacomunicaciones
         };
         console.log("las actividades: ",this.props);
         axios.post('http://localhost:4000/actividades', NewActivity/*,{
@@ -262,6 +267,7 @@ export default class ActivityForms extends Component{
                     type="number"
                     placeholder="%"/>%
                     </label>
+                    
                     <label>
                     Tipo de verificador
                     <select
@@ -291,6 +297,14 @@ export default class ActivityForms extends Component{
                     onChange={this.onInputChange}
                     name="DescripcionAct" 
                     value={this.state.DescripcionAct} 
+                    type="text"/>
+                    <label>
+                    ideasfuerzacomunicaciones
+                    </label>
+                    <input 
+                    onChange={this.onInputChange}
+                    name="ideasfuerzacomunicaciones" 
+                    value={this.state.ideasfuerzacomunicaciones} 
                     type="text"/>
                     </label>
                     <label>Material de Apoyo

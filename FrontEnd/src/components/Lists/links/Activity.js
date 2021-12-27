@@ -22,7 +22,21 @@ export default class Activity extends Component {
             </button>
             </div>
             <h4>Fecha:{this.props.activity.fecha}</h4>
-                <p>{this.props.activity.responsableactividad}</p>
+                <p>Responsable de la actividad:{this.props.activity.responsableactividad}</p>
+                <p> Objetivo estratégico: {this.props.activity.objetivoestr}</p>
+                <p>Descripción de la actividad: {this.props.activity.descripcionact}</p>
+                 <p>Publico objetivo: {this.props.activity.publicoobj}</p>
+                 Contraparte de la actividad: {this.props.activity.contraparteact}
+                 <p>Mecanismo: {this.props.activity.mecanismoconv}
+                 <p>Lugar de la actividad: {this.props.activity.lugar}</p>
+                 <p>Costo total de la actividad:{this.props.activity.costototal} </p>
+                 <p>Aportes solicitados: {this.props.activity.aportesolic}</p>
+                 <p>Indicadores de medicions{this.props.activity.indicadoresmed}</p>
+                 <p>Porcentaje comprometido de Cumplimiento: {this.props.activity.proccompr}</p>
+                 <p>Tipo de verificación{this.props.activity.tipoverific}</p>
+                 <p>Fecha de realización:{this.props.activity.fecha}</p>
+                 <p>Tipo de actividad: {this.props.activity.tipoact}</p>
+                </p>
             </div>
         )
     }

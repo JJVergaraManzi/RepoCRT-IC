@@ -20,7 +20,20 @@ export default class Reunions extends Component {
             </button>
             </div>
             <h4>Fecha:{this.props.reunion.fecha}</h4>
-                <p>{this.props.reunion.responsablereunion}</p>
+                <p>Responsable de la reunión: {this.props.reunion.responsablereunion}</p>
+                <p>Modalidad de la reunión: {this.props.reunion.modalidad}</p>
+                <p>Fecha: {this.props.reunion.fecha}</p>
+                <p>Hora: {this.props.reunion.hora}</p>
+                <p>Objetivo de la reunión: {this.props.reunion.objetivo}</p>
+                <p>Minuta de la reunion: {this.props.reunion.minuta}</p>
+                <p>Contraparte de la reunion: {this.props.reunion.contraparte}</p>
+                <p>Lugar o formato: {this.props.reunion.lugaroformato}</p>
+                <p>Asistentes invitados: {this.props.reunion.asistentesinvitados}</p>
+                <p>Asistentes presentes: {this.props.reunion.asistentespresentes}</p>
+                <p>Compromisos del CRTIC: {this.props.reunion.compromisoscrtic}</p>
+                <p>Compromisos de la contraparte: {this.props.reunion.compromisoscontraparte}</p>
+                <p>Responsable de la reunion: {this.props.reunion.verificadortipo}</p>
+                <p>Tres ideas: {this.props.reunion.tresideas}</p>
             </div>
         )
     }
