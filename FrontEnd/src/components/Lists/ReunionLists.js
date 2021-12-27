@@ -9,6 +9,7 @@ export default class ActivityList extends Component{
     }
 
     async componentDidMount(){
+        console.log("Log de prueba para activityLists: ",this.props.lista)
         /*const res = await axios.get('http://localhost:1337/api/reunions-forms')
         //console.log("primer log: ", res.data.data[0].attributes)
         this.setState({
@@ -18,7 +19,7 @@ export default class ActivityList extends Component{
     }
 
     deleteActivity = async (ReunionsId) =>{
-        await axios.delete('http://localhost:1337/api/reunions-forms/'+ ReunionsId);
+        await axios.delete('http://localhost:4000/reuniones'+ ReunionsId);
         this.getreunions();
     }
 

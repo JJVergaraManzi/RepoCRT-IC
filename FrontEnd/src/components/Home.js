@@ -29,18 +29,18 @@ class Home extends Component {
   };
 
   componentDidMount = async () => {
-    const res = await axios.get('http://localhost:1337/api/activities-forms')
+    const res = await axios.get('http://localhost:4000/actividades')
     //console.log("primer log: ", res.data.data[0].attributes)
     this.setState({
-        activities : res.data.data
+        activities : res.data.actividades
     });
-    const aux = await axios.get('http://localhost:1337/api/reunion-forms')
+    console.log("Log de actividades",this.state.activities)
+    const aux = await axios.get('http://localhost:4000/reuniones')
     //console.log("primer log: ", res.data.data[0].attributes)
     this.setState({
-      reunions : aux.data.data
+      reunions : aux.data.reuniones
     });
-    console.log("primer log",this.state.activities)
-    console.log("segundo log",this.state.reunions)
+    console.log("Log de reuniones",this.state.reunions)
   
   };
 
@@ -64,7 +64,6 @@ class Home extends Component {
           <div className="col-md-4">
             <input
               aria-label="Search"
-              className="form-control mr-sm-2"
               type="search"
               //value={name}
               //onChange={filter}

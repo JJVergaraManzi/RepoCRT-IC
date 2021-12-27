@@ -77,7 +77,7 @@ export default class ActivityForms extends Component{
     state={
         ResponsableActividad:'',
         ObjetivoEstr:'',
-        TipoAct:'',
+        //TipoAct:'',
         DescripcionAct:'',
         PublicoObj:'',
         ContraparteAct:'',
@@ -89,32 +89,32 @@ export default class ActivityForms extends Component{
         ProcCompr:'',
         TipoVerific:'',
         Fecha:null,
-        MaterialApoyo:null
+        //MaterialApoyo:null
     }
     
     onSubmit= async(e) =>{
         e.preventDefault();
         const NewActivity={
-            ResponsableActividad: this.state.ResponsableActividad,
-            ObjetivoEstr: this.state.ObjetivoEstr,
-            TipoAct: this.state.TipoAct,
-            DescripcionAct: this.state.DescripcionAct,
-            PublicoObj: this.state.PublicoObj,
-            ContraparteAct: this.state.ContraparteAct,
-            MecanismoConv: this.state.MecanismoConv,
-            Lugar: this.state.Lugar,
-            CostoTotal: this.state.CostoTotal,
-            AporteSolic: this.state.AporteSolic,
-            IndicadoresMed: this.state.IndicadoresMed,
-            ProcCompr: this.state.ProcCompr,
-            TipoVerific: this.state.TipoVerific,
-            Fecha: this.state.Fecha,
+            responsableactividad: this.state.ResponsableActividad,
+            objetivoestr: this.state.ObjetivoEstr,
+            //TipoAct: this.state.TipoAct,
+            descripcionact: this.state.DescripcionAct,
+            publicoobj: this.state.PublicoObj,
+            contraparteact: this.state.ContraparteAct,
+            mecanismoconv: this.state.MecanismoConv,
+            lugar: this.state.Lugar,
+            costototal: this.state.CostoTotal,
+            aportesolic: this.state.AporteSolic,
+            indicadoresmed: this.state.IndicadoresMed,
+            proccompr: this.state.ProcCompr,
+            tipoverific: this.state.TipoVerific,
+            fecha: this.state.Fecha,
             MaterialApoyo: this.state.MaterialApoyo
         };
         console.log("las actividades: ",this.props);
-        axios.post('http://localhost:4000/api/FormularioActividades', NewActivity,{
+        axios.post('http://localhost:4000/actividades', NewActivity/*,{
             headers: {'content-type': 'multipart/form-data'}
-        })
+        }*/)
         .then(response =>{
             console.log(response.data)
         })
@@ -161,25 +161,27 @@ export default class ActivityForms extends Component{
                     
                     <div className="card">
                         <h1>Objetivos Específicos Lineamientos CRT+IC</h1>
-                        <p>VIGILAR: </p>
+                        <p><b>VIGILAR: </b></p>
                         <p>Tendencias, oportunidades y brechas tecnológicas para la innovación creativa</p>
                         <p>Dependiendo de la actividad hay campos opcionales que no son necesarios. Favor completar todos los que apliquen para el tipo de actividad.</p>
-                        <p>Valorar y valorizar: </p>
+                        <p><b>Valorar y valorizar: </b></p>
                         <p>El desarrollo de proyectos creativos de base técnologica para su inserciónen el mercado</p>
-                        <p>Articular:</p>
+                        <p><b>Articular: </b></p>
                         <p>A todos los actores del ecosistema de emprendimiento e innovación para generar instancia de</p>
                         <p>desarrollo y vinculación de las industrias creativas en otros sectores.</p>
-                        <p>Formar capital humano avanzado:</p>
+                        <p><b>Formar capital humano avanzado:</b></p>
                         <p>Para el fortalecimiento de proyectos de base tecnológica de las industrias creativas.</p>
-                        <p>Pomover y difundir: </p>
+                        <p><b>Pomover y difundir: </b></p>
                         <p>Los avances, reflexiones y resultados del centro para generar insumos que aporten de manera</p>
                         <p>Contundente a las políticas públicas, la investigación académica y el desarrollo del sector privado.</p>
                     </div>
-                    Objetivo Estratégico
-                    <select 
+                   <label> Objetivo Estratégico</label>
+                    <select
+                    className="form-select form-select-lg mb-3" 
                     name="ObjetivoEstr"
                     selected={this.state.ObjetivoEstr} 
-                    onChange={this.onInputChange}>            
+                    onChange={this.onInputChange}>
+                        <option >Seleccione su objetivo estratégico</option>            
                         <option value="Vigilar">Vigilar</option>
                         <option value="Articular">Articular</option>
                         <option value="Valorizar">Valorizar</option>
@@ -188,23 +190,7 @@ export default class ActivityForms extends Component{
                         <option value="Difundir">Difundir</option>
                         <option value="Otro">Otro</option>
                     </select>
-                    <label>
-                    Tipo de actividad/ acción
-                    <select 
-                    name="TipoAct"
-                    value={this.state.TipoAct} 
-                    onChange={this.onInputChange}>            
-                        <option value="Taller">Taller</option>
-                        <option value="Desarrollo / Planificación / Avance propio">Desarrollo / Planificación / Avance propio</option>
-                        <option value="Festival">Festival</option>
-                        <option value="Concierto">Concierto</option>
-                        <option value="Seminario">Seminario</option>
-                        <option value="Difundir">Difundir</option>
-                        <option value="Laboratorio">Laboratorio</option>
-                        <option value="Entrenamiento">Entrenamiento</option>
-                        <option value="Otro">Otro</option>
-                    </select>
-                    </label>
+                    
                     <label>Publico Objetivo</label>
                     <input 
                     onChange={this.onInputChange}
@@ -219,10 +205,12 @@ export default class ActivityForms extends Component{
                     type="text"/>
                     <label>
                     Mecanismo de convocatoria / selección
-                    <select 
+                    <select
+                    className="form-select form-select-lg mb-3" 
                     name="MecanismoConv"
                     selected={this.state.MecanismoConv} 
-                    onChange={this.onInputChange}>            
+                    onChange={this.onInputChange}>
+                        <option >Seleccione el Mecanismo de convocatoria / selección</option>             
                         <option value="Convocatoria pública abierta">Convocatoria pública abierta</option>
                         <option value="Postulación y selección por comité experto">Postulación y selección por comité experto</option>
                         <option value="Otro">Otro</option>
@@ -248,10 +236,12 @@ export default class ActivityForms extends Component{
                     type="number"/>
                     <label>
                     Indicadores de medición
-                    <select 
+                    <select
+                    className="form-select form-select-lg mb-3" 
                     name="IndicadoresMed"
                     selected={this.state.IndicadoresMed} 
-                    onChange={this.onInputChange}>            
+                    onChange={this.onInputChange}>       
+                        <option >Seleccione el indicadores de medición</option>     
                         <option value="Ejecución presupuestaria">Ejecución presupuestaria</option>
                         <option value="Cumplimiento Actividades comprometidas">Cumplimiento Actividades comprometidas</option>
                         <option value="Cobertura territorial">Cobertura territorial</option>
@@ -270,10 +260,12 @@ export default class ActivityForms extends Component{
                     </label>
                     <label>
                     Tipo de verificador
-                    <select 
+                    <select
+                    className="form-select form-select-lg mb-3" 
                     name="TipoVerific"
                     selected={this.state.TipoVerific} 
-                    onChange={this.onInputChange}>            
+                    onChange={this.onInputChange}>
+                        <option >Seleccione el tipo de verificador</option>               
                         <option value="Fotografías">Fotografías</option>
                         <option value="Lista de asistencia">Lista de asistencia</option>
                         <option value="Registro de actividad">Registro de actividad</option>
