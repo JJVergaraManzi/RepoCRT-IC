@@ -15,7 +15,8 @@ export const createActividades = async (req, res) => {
             indicadoresmed,
             proccompr,
             tipoverific,
-            fecha} = req.body;
+            fecha,
+            tipoact } = req.body;
         let newActividad = await actividades.create({
             responsableactividad,
             objetivoestr,
@@ -29,7 +30,8 @@ export const createActividades = async (req, res) => {
             indicadoresmed,
             proccompr,
             tipoverific,
-            fecha
+            fecha,
+            tipoact 
         },{
             fields: [
                 'responsableactividad',
@@ -44,7 +46,8 @@ export const createActividades = async (req, res) => {
                 'indicadoresmed',
                 'proccompr',
                 'tipoverific',
-                'fecha' ]
+                'fecha',
+                'tipoact' ]
         });
         res.json({
             resultado: true,
@@ -75,7 +78,9 @@ export const updateActividades = async (req, res) => {
             indicadoresmed,
             proccompr,
             tipoverific,
-            fecha} =  req.body;
+            fecha,
+            tipoact,
+            ideasfuerzacomunicaciones } =  req.body;
         const actividadUpdate = await actividades.update({
             responsableactividad,
             objetivoestr,
@@ -89,7 +94,9 @@ export const updateActividades = async (req, res) => {
             indicadoresmed,
             proccompr,
             tipoverific,
-            fecha
+            fecha,
+            tipoact,
+            ideasfuerzacomunicaciones 
         },
         {
             where: {id}
@@ -146,7 +153,9 @@ export const getActividadId = async (req, res) => {
                     'indicadoresmed',
                     'proccompr',
                     'tipoverific',
-                    'fecha']
+                    'fecha',
+                    'tipoact',
+                    'ideasfuerzacomunicaciones']
                     });
             res.json({
                 resultado: true,
@@ -179,7 +188,9 @@ export const getAllActividades = async (req, res) => {
                 'indicadoresmed',
                 'proccompr',
                 'tipoverific',
-                'fecha'],
+                'fecha',
+                'tipoact',
+                'ideasfuerzacomunicaciones'],
             order: [
                 ['id', 'DESC']
             ]

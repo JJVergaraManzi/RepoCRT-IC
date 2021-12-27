@@ -44,6 +44,12 @@ const actividades = database.define('formularioactividades', {
     },
     fecha:{
         type: sequelize.DATEONLY
+    },
+    tipoact:{
+        type: sequelize.TEXT
+    },
+    ideasfuerzacomunicaciones:{
+        type: sequelize.TEXT
     }
 },{
     timestamps: false

@@ -53,8 +53,8 @@ const Styles = styled.div`
    font-size: 12px;
    height: 30px;
  }
- .label{
-
+ label{
+    text-align: center;
  }
 
  .submitButton {
@@ -85,8 +85,50 @@ export default class ReunionForm extends Component{
         CompromisosContraparte:'',
         VerificadorTipo:'',
         VerificadorArchivo:null,
-        TresIdeas:'', 
+        TresIdeas:'',
+        responsableError:'',
+        modalidadError:'',
+        fechaError:'',
+        horaError:'',
+        minutaError:'',
+        LugarError:''
     }
+    validateReunions = () => {
+        let responsableError="";
+        let modalidadError=""; 
+        let fechaError=""; 
+        let horaError="";
+        let minutaError="";
+        let LugarError="";
+    
+        if (!this.state.ResponsableReunion) {
+            responsableError = "No puede ingresar este dato en blanco";
+        }
+        if (!this.state.Modalidad) {
+            modalidadError = "No puede ingresar este dato en blanco";
+        }
+        if (!this.state.Fecha) {
+            fechaError = "No puede ingresar este dato en blanco";
+        }
+        if (!this.state.Hora) {
+            horaError = "No puede ingresar este dato en blanco";
+        }
+        if (!this.state.Minuta) {
+            minutaError = "No puede ingresar este dato en blanco";
+        }
+        if (!this.state.Lugar){
+            LugarError = "No puede ingresar este dato en blanco";
+        }
+        
+        if (responsableError || modalidadError ||fechaError
+            || horaError|| minutaError|| LugarError) {
+            this.setState({ responsableError, modalidadError, fechaError, 
+                            horaError, minutaError,LugarError});
+            return false;
+          }
+    
+        return true;
+      };
     onSubmit= async(e) =>{
         e.preventDefault();
         const NewReunion={
@@ -103,7 +145,7 @@ export default class ReunionForm extends Component{
             compromisoscrtic:this.state.CompromisosCRTIC,
             compromisoscontraparte:this.state.CompromisosContraparte,
             verificadortipo:this.state.VerificadorTipo,
-            VerificadorArchivo:this.stateVerificadorArchivo,
+            verificadorarchivo:this.stateVerificadorArchivo,
             tresideas:this.state.TresIdeas, 
         };
         const first_res = await axios.post("http://localhost:4000/reuniones",NewReunion
@@ -145,17 +187,18 @@ export default class ReunionForm extends Component{
                         Favor completar todos los que apliquen para el tipo de reunión.
                         Gracias por ayudar a que el CRT+IC salga adelante.</p>
                         </div>
-                        <label>Responsable de la reunión
+                        <h5>Responsable de la reunión
                         <input 
                         name="ResponsableReunion" 
                         value={this.state.ResponsableReunion}
                         onChange={this.onInputChange}
                         type="text" />
-                        </label>
-                        <label>
+                        </h5>
+                        <h5>
                         Modalidad
-                        </label>
-                        <select 
+                        </h5>
+                        <select
+                        className="form-select form-select-lg mb-3"  
                         name="Modalidad" 
                         selected={this.state.Modalidad}
                         onChange={this.onInputChange}>
@@ -166,91 +209,92 @@ export default class ReunionForm extends Component{
                             <option value="Coordinación vía texto (Mensajería instantánea o cadena de correos)">Coordinación vía texto (Mensajería instantánea o cadena de correos)</option>
                             <option value="Otro">Otro</option>
                         </select>
-                        <label>
+                        <h5>
                         Fecha
-                        </label>
+                        </h5>
                         <input 
                         name="Fecha"
                         type="date" 
                         selected={this.state.Fecha} 
                         onChange={this.onInputChange} />
-                        <label>
+                        <h5>
                         Hora
-                        </label>
+                        </h5>
                         <input 
                         name="Hora"
                         onChange={this.onInputChange} 
                         type="time" 
                         min="00:00" 
                         max="23:59" />
-                        <label>
+                        <h5>
                         Objetivo de la reunión
-                        </label>
+                        </h5>
                         <input 
                         name="Objetivo" 
                         value={this.state.Objetivo}
                         onChange={this.onInputChange}
                         type="text" />
-                        <label>
+                        <h5>
                         Minuta de la reunión
-                        </label>
+                        </h5>
                         <input 
                         name="Minuta" 
                         value={this.state.Minuta}
                         onChange={this.onInputChange}
                         type="text" />
-                        <label>
+                        <h5>
                         Lugar o Formato
-                        </label>
+                        </h5>
                         <input  
                         name="LugarOFormato" 
                         value={this.state.LugarOFormato}
                         onChange={this.onInputChange}
                         type="text" />
-                        <label>
+                        <h5>
                         Contraparte actividad
-                        </label>
+                        </h5>
                         <input 
                         name="Contraparte" 
                         value={this.state.Contraparte}
                         onChange={this.onInputChange}
                         type="text" />
-                        <label>
+                        <h5>
                         Asistentes invitados
-                        </label>
+                        </h5>
                         <input 
                         name="AsistentesInvitados" 
                         value={this.state.AsistentesInvitados}
                         onChange={this.onInputChange}
                         type="text" />
-                        <label>
+                        <h5>
                         Asistentes presentes
-                        </label>
+                        </h5>
                         <input 
                         name="AsistentesPresentes" 
                         value={this.state.AsistentesPresentes}
                         onChange={this.onInputChange}
                         type="text" />
-                        <label>
+                        <h5>
                         Compromisos CRT+IC
-                        </label>
+                        </h5>
                         <input 
                         name="CompromisosCRTIC" 
                         value={this.state.CompromisosCRTIC}
                         onChange={this.onInputChange}
                         type="text" />
-                        <label>
+                        <h5>
                         Compromisos contraparte
-                        </label>
+                        </h5>
                         <input 
                         name="CompromisosContraparte" 
                         value={this.state.CompromisosContraparte}
                         onChange={this.onInputChange}
                         type="text" />
-                        <label>
+                        <h5>
                         Tipo de verificador
-                        </label>
-                        <select 
+                        </h5>
+                        <select
+                        className="form-select form-select-lg mb-3"  
                         name="VerificadorTipo"
                         onChange={this.onInputChange}
                         selected={this.state.VerificadorTipo}
@@ -264,17 +308,17 @@ export default class ReunionForm extends Component{
                             <option value="Informe de programa">Informe de programa</option>
                             <option value="Otro">Otro</option>
                         </select>
-                        <label>
+                        <h5>
                         3 Ideas fuerza para comunicaciones
-                        </label>
+                        </h5>
                         <input 
                         name="TresIdeas"
                         value={this.state.TresIdeas} 
                         onChange={this.onInputChange}
                         type="text" />
-                        <label>
+                        <h5>
                         Archivo Verificador
-                        </label>
+                        </h5>
                         <input  
                         name="VerificadorArchivo" 
                         onChange={this.onFileChange}

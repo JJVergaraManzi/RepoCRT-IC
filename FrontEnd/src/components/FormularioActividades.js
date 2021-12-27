@@ -149,12 +149,12 @@ export default class ActivityForms extends Component{
             <Styles>
                 <form onSubmit={this.onSubmit}>
                     <div>
-                        <h1>Reporte de Reuniones CRTIC</h1>
+                        <h2>Reporte de Actividades CRTIC</h2>
                         <p>Favor reportar todas las actividades correspondientes al centro. Ya sean estas actividades individuales, reuniones, eventos, etc.
                         Dependiendo de la actividad hay campos opcionales que no son necesarios. Favor completar todos los que apliquen para el tipo de actividad.
                         Gracias por ayudar a que el CRT+IC salga adelante.</p>
                     </div>
-                    <label>Responsable de Actividad</label>
+                    <h5>Responsable de Actividad</h5>
                     <input 
                     onChange={this.onInputChange}
                     name="ResponsableActividad"  
@@ -163,11 +163,11 @@ export default class ActivityForms extends Component{
                     
                     <div className="card">
                         <h1>Objetivos Específicos Lineamientos CRT+IC</h1>
-                        <p><b>VIGILAR: </b></p>
+                        <p><b>Vigilar: </b></p>
                         <p>Tendencias, oportunidades y brechas tecnológicas para la innovación creativa
                          Dependiendo de la actividad hay campos opcionales que no son necesarios. Favor completar todos los que apliquen para el tipo de actividad.</p>
                         <p><b>Valorar y valorizar: </b></p>
-                        <p>El desarrollo de proyectos creativos de base técnologica para su inserciónen el mercado</p>
+                        <p>El desarrollo de proyectos creativos de base técnologica para su inserción en el mercado</p>
                         <p><b>Articular: </b></p>
                         <p>A todos los actores del ecosistema de emprendimiento e innovación para generar instancia de
                           desarrollo y vinculación de las industrias creativas en otros sectores.</p>
@@ -177,7 +177,23 @@ export default class ActivityForms extends Component{
                         <p>Los avances, reflexiones y resultados del centro para generar insumos que aporten de manera
                          Contundente a las políticas públicas, la investigación académica y el desarrollo del sector privado.</p>
                     </div>
-                   <label> Objetivo Estratégico</label>
+                   <h5> Objetivo Estratégico</h5>
+                    <select
+                    className="form-select form-select-lg mb-3" 
+                    name="TipoAct"
+                    selected={this.state.TipoAct} 
+                    onChange={this.onInputChange}>
+                        <option >Seleccione su tipo de actividad</option>            
+                        <option value="Taller">Taller</option>
+                        <option value="Desarrollo / Planificación / Avance propio">Desarrollo / Planificación / Avance propio</option>
+                        <option value="Festival">Festival</option>
+                        <option value="Concierto">Concierto</option>
+                        <option value="Seminario">Seminario</option>
+                        <option value="Laboratorio">Laboratorio</option>
+                        <option value="Entrenamiento">Entrenamiento</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                    <h5> Tipo de actividad</h5>
                     <select
                     className="form-select form-select-lg mb-3" 
                     name="ObjetivoEstr"
@@ -193,19 +209,19 @@ export default class ActivityForms extends Component{
                         <option value="Otro">Otro</option>
                     </select>
                     
-                    <label>Publico Objetivo</label>
+                    <h5>Publico Objetivo</h5>
                     <input 
                     onChange={this.onInputChange}
                     name="PublicoObj" 
                     value={this.state.PublicoObj} 
                     type="text"/>
-                    <label>Contraparte actividad</label>
+                    <h5>Contraparte actividad</h5>
                     <input 
                     onChange={this.onInputChange}
                     name="ContraparteAct" 
                     value={this.state.ContraparteAct} 
                     type="text"/>
-                    <label>
+                    <h5>
                     Mecanismo de convocatoria / selección
                     <select
                     className="form-select form-select-lg mb-3" 
@@ -217,26 +233,28 @@ export default class ActivityForms extends Component{
                         <option value="Postulación y selección por comité experto">Postulación y selección por comité experto</option>
                         <option value="Otro">Otro</option>
                     </select>
-                    </label>
-                    <label>Lugar de realización</label>
+                    </h5>
+                    <h5>Lugar de realización</h5>
                     <input 
                     onChange={this.onInputChange}
                     name="Lugar" 
                     value={this.state.Lugar}
                     type="text"/>
-                    <label>Costo Total</label>
+                    <h5>Costo Total</h5>
                     <input 
                     onChange={this.onInputChange}
                     name="CostoTotal" 
                     value={this.state.CostoTotal}  
-                    type="number"/>
-                    <label>Aporte Solicitado a 3ros</label>
+                    type="text" 
+                    pattern="[0-9]*"/>
+                    <h5>Aporte Solicitado a 3ros</h5>
                     <input 
                     onChange={this.onInputChange}
                     name="AporteSolic" 
                     value={this.state.AporteSolic} 
-                    type="number"/>
-                    <label>
+                    type="text" 
+                    pattern="[0-9]*"/>
+                    <h5>
                     Indicadores de medición
                     <select
                     className="form-select form-select-lg mb-3" 
@@ -251,7 +269,7 @@ export default class ActivityForms extends Component{
                         <option value="Satisfacción de usuarios">Satisfacción de usuarios</option>
                         <option value="Otro">Otro</option>
                     </select>
-                    </label>
+                    </h5>
                     <div>
                         <h1 >Porcentaje comprometido de Cumplimiento</h1>
                         <p>Referente a los Indicadores de medición seleccionados anteriormente, indicar un porcentaje de 
@@ -259,16 +277,17 @@ export default class ActivityForms extends Component{
                         Por ejemplo:  cumplimiento;  4 talleres, comprometer 100% es realizar 4/4; 
                         </p>
                         </div>
-                    <label>Porcentaje comprometido.
+                    <h5>Porcentaje comprometido.
                     <input 
                     onChange={this.onInputChange}
                     name="ProcCompr" 
                     value={this.state.ProcCompr} 
-                    type="number"
+                    type="text" 
+                    pattern="[0-9]*"
                     placeholder="%"/>%
-                    </label>
+                    </h5>
                     
-                    <label>
+                    <h5>
                     Tipo de verificador
                     <select
                     className="form-select form-select-lg mb-3" 
@@ -284,35 +303,35 @@ export default class ActivityForms extends Component{
                         <option value="Informe de programa">Informe de programa</option>
                         <option value="Otro">Otro</option>
                     </select>
-                    </label>
-                    <label>Fecha de actividad
+                    </h5>
+                    <h5>Fecha de actividad
                     <input
                     name="Fecha"
                     type="date"  
                     onChange={this.onInputChange}
                     selected={this.state.Fecha} />
-                    </label>
-                    <label>Descripción de la actividad / acción
+                    </h5>
+                    <h5>Descripción de la actividad / acción
                     <input 
                     onChange={this.onInputChange}
                     name="DescripcionAct" 
                     value={this.state.DescripcionAct} 
                     type="text"/>
-                    <label>
-                    ideasfuerzacomunicaciones
-                    </label>
+                    <h5>
+                    Ideas Fuerza Comunicaciones
+                    </h5>
                     <input 
                     onChange={this.onInputChange}
                     name="ideasfuerzacomunicaciones" 
                     value={this.state.ideasfuerzacomunicaciones} 
                     type="text"/>
-                    </label>
-                    <label>Material de Apoyo
+                    </h5>
+                    <h5>Material de Apoyo
                     <input 
                     onChange={this.onFileChange}
                     name="MaterialApoyo" 
                     type="file" />
-                    </label>
+                    </h5>
                     <button 
                     className="submitButton"
                     type="submit" >
