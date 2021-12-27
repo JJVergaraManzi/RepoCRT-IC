@@ -94,7 +94,7 @@ export default class ReunionForm extends Component{
             modalidad:this.state.Modalidad,
             fecha: this.state.Fecha,
             hora:this.state.Hora,
-            //Objetivo:this.state.Objetivo,
+            objetivo:this.state.Objetivo,
             minuta:this.state.Minuta,
             contraparte:this.state.Contraparte,
             lugaroformato:this.state.LugarOFormato,
@@ -141,9 +141,9 @@ export default class ReunionForm extends Component{
                     <form onSubmit={this.onSubmit}>
                         <div>
                         <h1 >Registro de Reuniones</h1>
-                        <p>Favor reportar todas las reuniones correspondientes al centro.</p>
-                        <p>Favor completar todos los que apliquen para el tipo de reunión.</p>
-                        <p>Gracias por ayudar a que el CRT+IC salga adelante.</p>
+                        <p>Favor reportar todas las reuniones correspondientes al centro.
+                        Favor completar todos los que apliquen para el tipo de reunión.
+                        Gracias por ayudar a que el CRT+IC salga adelante.</p>
                         </div>
                         <label>Responsable de la reunión
                         <input 
@@ -158,7 +158,8 @@ export default class ReunionForm extends Component{
                         <select 
                         name="Modalidad" 
                         selected={this.state.Modalidad}
-                        onChange={this.onInputChange}>            
+                        onChange={this.onInputChange}>
+                            <option >Seleccione la modalidad</option>              
                             <option value="Reunion Prescencial">Reunion Prescencial</option>
                             <option value="Reunion Virtual (Conferencia)">Reunion Virtual (Conferencia)</option>
                             <option value="Reunion Virtual (Llamada)">Reunion Virtual (Llamada)</option>
@@ -253,7 +254,8 @@ export default class ReunionForm extends Component{
                         name="VerificadorTipo"
                         onChange={this.onInputChange}
                         selected={this.state.VerificadorTipo}
-                        placeholder="Seleccione su tipo de verificador">            
+                        placeholder="Seleccione su tipo de verificador">   
+                            <option >Seleccione el tipo de verificador</option>             
                             <option value="Fotografías">Fotografías</option>
                             <option value="Lista de asistencia">Lista de asistencia</option>
                             <option value="Registro de actividad">Registro de actividad</option>

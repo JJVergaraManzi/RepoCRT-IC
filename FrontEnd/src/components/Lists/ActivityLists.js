@@ -26,9 +26,10 @@ export default class ActivityList extends Component{
 
     render(){
         return(
+                
             this.props.lista.map(activity =>(
                 <Activity key={activity.id} activity={activity}/>
                 ))
-                )
+            )
     }
 }

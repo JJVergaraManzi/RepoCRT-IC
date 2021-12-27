@@ -26,10 +26,9 @@ export default class ActivityList extends Component{
     render(){
         return(
                 
-                    this.props.lista.map(reunion =>(
-                        <Reunions key={reunion.id} reunion={reunion}/>
-                    ))
-                
+            this.props.lista.map(reunion =>(
+                <Reunions key={reunion.id} reunion={reunion}/>
+            ))
         )
     }
 }

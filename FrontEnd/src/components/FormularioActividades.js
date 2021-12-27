@@ -77,7 +77,6 @@ export default class ActivityForms extends Component{
     state={
         ResponsableActividad:'',
         ObjetivoEstr:'',
-        //TipoAct:'',
         DescripcionAct:'',
         PublicoObj:'',
         ContraparteAct:'',
@@ -89,6 +88,7 @@ export default class ActivityForms extends Component{
         ProcCompr:'',
         TipoVerific:'',
         Fecha:null,
+        TipoAct:'',
         //MaterialApoyo:null
     }
     
@@ -97,7 +97,6 @@ export default class ActivityForms extends Component{
         const NewActivity={
             responsableactividad: this.state.ResponsableActividad,
             objetivoestr: this.state.ObjetivoEstr,
-            //TipoAct: this.state.TipoAct,
             descripcionact: this.state.DescripcionAct,
             publicoobj: this.state.PublicoObj,
             contraparteact: this.state.ContraparteAct,
@@ -109,6 +108,7 @@ export default class ActivityForms extends Component{
             proccompr: this.state.ProcCompr,
             tipoverific: this.state.TipoVerific,
             fecha: this.state.Fecha,
+            tipoact: this.state.TipoAct,
             MaterialApoyo: this.state.MaterialApoyo
         };
         console.log("las actividades: ",this.props);
@@ -136,9 +136,6 @@ export default class ActivityForms extends Component{
             MaterialApoyo: e.target.files[0]
         })
     }
-    onChangeDate = fecha => {
-        this.setState({ fecha });
-    }
     
 
 
@@ -148,9 +145,9 @@ export default class ActivityForms extends Component{
                 <form onSubmit={this.onSubmit}>
                     <div>
                         <h1>Reporte de Reuniones CRTIC</h1>
-                        <p>Favor reportar todas las actividades correspondientes al centro. Ya sean estas actividades individuales, reuniones, eventos, etc.</p>
-                        <p>Dependiendo de la actividad hay campos opcionales que no son necesarios. Favor completar todos los que apliquen para el tipo de actividad.</p>
-                        <p>Gracias por ayudar a que el CRT+IC salga adelante.</p>
+                        <p>Favor reportar todas las actividades correspondientes al centro. Ya sean estas actividades individuales, reuniones, eventos, etc.
+                        Dependiendo de la actividad hay campos opcionales que no son necesarios. Favor completar todos los que apliquen para el tipo de actividad.
+                        Gracias por ayudar a que el CRT+IC salga adelante.</p>
                     </div>
                     <label>Responsable de Actividad</label>
                     <input 
@@ -162,18 +159,18 @@ export default class ActivityForms extends Component{
                     <div className="card">
                         <h1>Objetivos Específicos Lineamientos CRT+IC</h1>
                         <p><b>VIGILAR: </b></p>
-                        <p>Tendencias, oportunidades y brechas tecnológicas para la innovación creativa</p>
-                        <p>Dependiendo de la actividad hay campos opcionales que no son necesarios. Favor completar todos los que apliquen para el tipo de actividad.</p>
+                        <p>Tendencias, oportunidades y brechas tecnológicas para la innovación creativa
+                         Dependiendo de la actividad hay campos opcionales que no son necesarios. Favor completar todos los que apliquen para el tipo de actividad.</p>
                         <p><b>Valorar y valorizar: </b></p>
                         <p>El desarrollo de proyectos creativos de base técnologica para su inserciónen el mercado</p>
                         <p><b>Articular: </b></p>
-                        <p>A todos los actores del ecosistema de emprendimiento e innovación para generar instancia de</p>
-                        <p>desarrollo y vinculación de las industrias creativas en otros sectores.</p>
+                        <p>A todos los actores del ecosistema de emprendimiento e innovación para generar instancia de
+                          desarrollo y vinculación de las industrias creativas en otros sectores.</p>
                         <p><b>Formar capital humano avanzado:</b></p>
                         <p>Para el fortalecimiento de proyectos de base tecnológica de las industrias creativas.</p>
                         <p><b>Pomover y difundir: </b></p>
-                        <p>Los avances, reflexiones y resultados del centro para generar insumos que aporten de manera</p>
-                        <p>Contundente a las políticas públicas, la investigación académica y el desarrollo del sector privado.</p>
+                        <p>Los avances, reflexiones y resultados del centro para generar insumos que aporten de manera
+                         Contundente a las políticas públicas, la investigación académica y el desarrollo del sector privado.</p>
                     </div>
                    <label> Objetivo Estratégico</label>
                     <select
@@ -250,6 +247,13 @@ export default class ActivityForms extends Component{
                         <option value="Otro">Otro</option>
                     </select>
                     </label>
+                    <div>
+                        <h1 >Porcentaje comprometido de Cumplimiento</h1>
+                        <p>Referente a los Indicadores de medición seleccionados anteriormente, indicar un porcentaje de 
+                        ejecución a comprometer, este debe ser medible.
+                        Por ejemplo:  cumplimiento;  4 talleres, comprometer 100% es realizar 4/4; 
+                        </p>
+                        </div>
                     <label>Porcentaje comprometido.
                     <input 
                     onChange={this.onInputChange}
@@ -279,7 +283,7 @@ export default class ActivityForms extends Component{
                     <input
                     name="Fecha"
                     type="date"  
-                    onChange={this.onChangeDate}
+                    onChange={this.onInputChange}
                     selected={this.state.Fecha} />
                     </label>
                     <label>Descripción de la actividad / acción
