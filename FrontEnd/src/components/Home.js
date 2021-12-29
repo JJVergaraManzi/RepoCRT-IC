@@ -61,16 +61,16 @@ class Home extends Component {
   render() {
     return (
         <div className="container">
-          <div className="col-md-4">
-            <input
-              aria-label="Search"
-              type="search"
-              //value={name}
-              //onChange={filter}
-              className="input"
-              placeholder="Buscador"/>
-              
-            </div>
+            <div className="col-md-4">
+              <input
+                aria-label="Search"
+                type="search"
+                //value={name}
+                //onChange={filter}
+                className="input"
+                placeholder="Buscador"/>
+                
+              </div>
           <div className="row">
             <div className="col-md-4">
             <h5>Reuniones</h5>

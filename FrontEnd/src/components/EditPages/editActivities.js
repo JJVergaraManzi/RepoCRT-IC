@@ -69,9 +69,13 @@ const Styles = styled.div`
 `;
 
 export default class editActivities extends Component{
-    componentDidMount(){
-        console.log("prueba de Formulario de actividades para editar:  ", this.props)
-        
+    async componentDidMount(){
+        console.log("prueba de Formulario de Reuniones:  ", this.props)
+        if (this.props.match.params.id){
+            this.setState({
+                editing : true
+            })
+        }
     }
     state={
         ResponsableActividad:'',
@@ -90,7 +94,8 @@ export default class editActivities extends Component{
         TipoVerific:'',
         Fecha:new Date(),
         Idea:'',
-        MaterialApoyo:null
+        MaterialApoyo:null,
+        editing: false
     }
     
     onSubmit= async(e) =>{

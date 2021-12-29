@@ -1,79 +1,23 @@
 import React, {Component} from "react";
 import axios from 'axios'
 import styled from "styled-components";
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
 import { Button } from "bootstrap";
-
+import '../styles/forms/actividades.css';
+import { Toaster,toast  } from "react-hot-toast";
 
 const Styles = styled.div`
  background: #c93922;
  padding: 20px;
 
- h1 {
-   border-bottom: 1px solid white;
-   color: #3d3d3d;
-   font-family: sans-serif;
-   font-size: 20px;
-   font-weight: 600;
-   line-height: 24px;
-   padding: 10px;
-   
- }
-
- label{
-    text-align: center;
- }
-
- form {
-   background: white;
-   border: 1px solid #dedede;
-   display: flex;
-   flex-direction: column;
-   justify-content: space-around;
-   margin: 0 auto;
-   max-width: 800px;
-   padding: 30px 50px;
- }
-
- input {
-   border: 1px solid #d9d9d9;
-   border-radius: 4px;
-   box-sizing: border-box;
-   padding: 10px;
-   width: 100%;
- }
-
- label {
-   color: #3d3d3d;
-   display: block;
-   font-family: sans-serif;
-   font-size: 14px;
-   font-weight: 500;
-   margin-bottom: 5px;
- }
-
- .error {
-   color: red;
-   font-family: sans-serif;
-   font-size: 12px;
-   height: 30px;
- }
-
- .submitButton {
-   background-color: #6976d9;
-   color: white;
-   font-family: sans-serif;
-   font-size: 14px;
-   margin: 20px 0px;
- }
 `;
 
 export default class ActivityForms extends Component{
     componentDidMount(){
         console.log("prueba de Formulario de actividades:  ", this.props)
         
-    }
+        }
+    
     state={
         ResponsableActividad:'',
         ObjetivoEstr:'',
@@ -89,15 +33,86 @@ export default class ActivityForms extends Component{
         TipoVerific:'',
         Fecha:null,
         TipoAct:'',
-        ideasfuerzacomunicaciones:''
+        ideasfuerzacomunicaciones:'',
+        objdeactiv:'',
+        editing: false,
+        errors:{
+            ObjetivoEstr:"",
+            TipoAct:"",
+            objdeactiv:"",
+            DescripcionAct:"",
+            Lugar:"",
+            ProcCompr:"",
+            Fecha: ""
+        }
         //MaterialApoyo:null
     }
+    validateActivities = () => {
+        let errors= {}
+        let formIsValid = true
+        //let pattern = \b([0-9]|[1-9][0-9]|100)\b
+        if(!this.state.ObjetivoEstr ){
+            this.state.errors.ObjetivoEstr = "Ingrese el objetivo estretegico"
+            formIsValid = false
+          }
+      
+          if(!this.state.TipoAct ){
+            this.state.errors.TipoAct = "Ingrese el tipo de actividad"
+            formIsValid = false
+          }
+
+          if(!this.state.objdeactiv){
+            this.state.errors.objdeactiv = "20 caracteres como minimo para el objetivo de la actividad"
+            formIsValid = false
+          }
+
+          if(!this.state.DescripcionAct || this.state.DescripcionAct.length <20){
+            this.state.errors.DescripcionAct = "20 caracteres como minimo para la descripción"
+            formIsValid = false
+          }
+
+          if(!this.state.ProcCompr || (this.state.ProcCompr <0 && this.state.ProcCompr >100)){
+            this.state.errors.ProcCompr = "Ingrese el porcentaje y asegurese de que este entre los limites entre 0% y 100%"
+            formIsValid = false
+          }
+      
+          if(!this.state.Fecha ){
+            this.state.errors.Fechas = "Ingrese la fecha"
+            formIsValid = false
+          }
+      
+          if(!this.state.Lugar ){
+            this.state.errors.Lugar = "Ingrese el lugar de la reunion"
+            formIsValid = false
+          }
+          
+          this.setState({
+            errors: errors
+          })
+          if(formIsValid === false){
+            toast.error(this.state.errors.ObjetivoEstr +'\n'+
+              this.state.errors.TipoAct+'\n'+
+              this.state.errors.objdeactiv+'\n'+
+              this.state.errors.DescripcionAct+'\n'+
+              this.state.errors.ProcCompr+'\n'+
+              this.state.errors.Fechas+'\n'+
+              this.state.errors.Lugar)
+          }else{
+            document.getElementById("ActivityForm").reset();
+            toast.success("Reunión creada con exito")
+          }
+          return formIsValid
+      };
+      
     handleFile = (file) => {
         console.log("f", file);
         this.setState({file: file})
     }
     onSubmit= async(e) =>{
         e.preventDefault();
+        if (!this.validateActivities()){
+            return
+          }
         const NewActivity={
             responsableactividad: this.state.ResponsableActividad,
             objetivoestr: this.state.ObjetivoEstr,
@@ -114,7 +129,8 @@ export default class ActivityForms extends Component{
             fecha: this.state.Fecha,
             tipoact: this.state.TipoAct,
             MaterialApoyo: this.state.MaterialApoyo,
-            ideasfuerzacomunicaciones:this.state.ideasfuerzacomunicaciones
+            ideasfuerzacomunicaciones:this.state.ideasfuerzacomunicaciones,
+            objdeactiv :this.state.objdeactiv
         };
         console.log("las actividades: ",this.props);
         axios.post('http://localhost:4000/actividades', NewActivity/*,{
@@ -122,7 +138,27 @@ export default class ActivityForms extends Component{
         }*/)
         .then(response =>{
             console.log(response.data)
+            this.setState({
+            responsableactividad:'',
+            objetivoestr:'',
+            descripcionact:'',
+            publicoobj:'',
+            contraparteact:'',
+            mecanismoconv:'',
+            lugar:'',
+            costototal:'',
+            aportesolic:'',
+            indicadoresmed:'',
+            proccompr:'',
+            tipoverific:'',
+            fecha:'',
+            tipoact:'',
+            MaterialApoyo:'',
+            ideasfuerzacomunicaciones:'',
+            objdeactiv: ''
+            })
         })
+        
         .catch(error =>{
             console.log(error.data)
         })
@@ -147,7 +183,17 @@ export default class ActivityForms extends Component{
     render(){
         return (
             <Styles>
-                <form onSubmit={this.onSubmit}>
+              <div><Toaster 
+                position="bottom-right" 
+                toastOptions={{
+                    duration: 15000,
+                    style:{
+                      background:"#212121",
+                      color:"white"
+                    }
+                }}/>
+                </div>
+                <form id="ActivityForm" onSubmit={this.onSubmit}>
                     <div>
                         <h2>Reporte de Actividades CRTIC</h2>
                         <p>Favor reportar todas las actividades correspondientes al centro. Ya sean estas actividades individuales, reuniones, eventos, etc.
@@ -177,13 +223,13 @@ export default class ActivityForms extends Component{
                         <p>Los avances, reflexiones y resultados del centro para generar insumos que aporten de manera
                          Contundente a las políticas públicas, la investigación académica y el desarrollo del sector privado.</p>
                     </div>
-                   <h5> Objetivo Estratégico</h5>
+                   <h5> Tipo de actividad</h5>
                     <select
                     className="form-select form-select-lg mb-3" 
-                    name="TipoAct"
-                    selected={this.state.TipoAct} 
+                    name="tipoact"
+                    selected={this.state.tipoact} 
                     onChange={this.onInputChange}>
-                        <option >Seleccione su tipo de actividad</option>            
+                        <option value="">Seleccione su tipo de actividad</option>            
                         <option value="Taller">Taller</option>
                         <option value="Desarrollo / Planificación / Avance propio">Desarrollo / Planificación / Avance propio</option>
                         <option value="Festival">Festival</option>
@@ -193,13 +239,13 @@ export default class ActivityForms extends Component{
                         <option value="Entrenamiento">Entrenamiento</option>
                         <option value="Otro">Otro</option>
                     </select>
-                    <h5> Tipo de actividad</h5>
+                    <h5> objetivo estrategico</h5>
                     <select
                     className="form-select form-select-lg mb-3" 
                     name="ObjetivoEstr"
                     selected={this.state.ObjetivoEstr} 
                     onChange={this.onInputChange}>
-                        <option >Seleccione su objetivo estratégico</option>            
+                        <option value="">Seleccione su objetivo estratégico</option>            
                         <option value="Vigilar">Vigilar</option>
                         <option value="Articular">Articular</option>
                         <option value="Valorizar">Valorizar</option>
@@ -208,7 +254,19 @@ export default class ActivityForms extends Component{
                         <option value="Difundir">Difundir</option>
                         <option value="Otro">Otro</option>
                     </select>
-                    
+                    <h5>Objetivo de la actividad</h5>
+                    <input 
+                    onChange={this.onInputChange}
+                    name="objdeactiv" 
+                    value={this.state.objdeactiv} 
+                    type="text"/>
+                    <h5>Descripción de la actividad / acción</h5>
+                    <input 
+                    className="h-100"
+                    onChange={this.onInputChange}
+                    name="DescripcionAct" 
+                    value={this.state.DescripcionAct} 
+                    type="text"/>
                     <h5>Publico Objetivo</h5>
                     <input 
                     onChange={this.onInputChange}
@@ -228,7 +286,7 @@ export default class ActivityForms extends Component{
                     name="MecanismoConv"
                     selected={this.state.MecanismoConv} 
                     onChange={this.onInputChange}>
-                        <option >Seleccione el Mecanismo de convocatoria / selección</option>             
+                        <option value="">Seleccione el Mecanismo de convocatoria / selección</option>             
                         <option value="Convocatoria pública abierta">Convocatoria pública abierta</option>
                         <option value="Postulación y selección por comité experto">Postulación y selección por comité experto</option>
                         <option value="Otro">Otro</option>
@@ -261,7 +319,7 @@ export default class ActivityForms extends Component{
                     name="IndicadoresMed"
                     selected={this.state.IndicadoresMed} 
                     onChange={this.onInputChange}>       
-                        <option >Seleccione el indicadores de medición</option>     
+                        <option value="">Seleccione el indicadores de medición</option>     
                         <option value="Ejecución presupuestaria">Ejecución presupuestaria</option>
                         <option value="Cumplimiento Actividades comprometidas">Cumplimiento Actividades comprometidas</option>
                         <option value="Cobertura territorial">Cobertura territorial</option>
@@ -284,7 +342,7 @@ export default class ActivityForms extends Component{
                     value={this.state.ProcCompr} 
                     type="text" 
                     pattern="[0-9]*"
-                    placeholder="%"/>%
+                    placeholder="%"/>
                     </h5>
                     
                     <h5>
@@ -294,7 +352,7 @@ export default class ActivityForms extends Component{
                     name="TipoVerific"
                     selected={this.state.TipoVerific} 
                     onChange={this.onInputChange}>
-                        <option >Seleccione el tipo de verificador</option>               
+                        <option value="">Seleccione el tipo de verificador</option>               
                         <option value="Fotografías">Fotografías</option>
                         <option value="Lista de asistencia">Lista de asistencia</option>
                         <option value="Registro de actividad">Registro de actividad</option>
@@ -311,12 +369,7 @@ export default class ActivityForms extends Component{
                     onChange={this.onInputChange}
                     selected={this.state.Fecha} />
                     </h5>
-                    <h5>Descripción de la actividad / acción
-                    <input 
-                    onChange={this.onInputChange}
-                    name="DescripcionAct" 
-                    value={this.state.DescripcionAct} 
-                    type="text"/>
+                    
                     <h5>
                     Ideas Fuerza Comunicaciones
                     </h5>
@@ -325,7 +378,6 @@ export default class ActivityForms extends Component{
                     name="ideasfuerzacomunicaciones" 
                     value={this.state.ideasfuerzacomunicaciones} 
                     type="text"/>
-                    </h5>
                     <h5>Material de Apoyo
                     <input 
                     onChange={this.onFileChange}
