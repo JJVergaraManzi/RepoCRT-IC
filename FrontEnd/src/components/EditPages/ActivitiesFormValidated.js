@@ -1,186 +1,63 @@
-import React, {Component} from "react";
-import axios from 'axios'
-import styled from "styled-components";
-import 'react-datepicker/dist/react-datepicker.css'
-import { Button } from "bootstrap";
-import '../styles/forms/actividades.css';
-import { Toaster,toast  } from "react-hot-toast";
+import React from "react";
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
-const Styles = styled.div`
- background: #c93922;
- padding: 20px;
+const schema = yup.object().shape({
 
-`;
+})
 
-export default class ActivityForms extends Component{
-    componentDidMount(){
-        console.log("prueba de Formulario de actividades:  ", this.props)
-        
-        }
-    
-    state={
-        ResponsableActividad:'',
-        ObjetivoEstr:'',
-        DescripcionAct:'',
-        PublicoObj:'',
-        ContraparteAct:'',
-        MecanismoConv:'',
-        Lugar:'',
-        CostoTotal:'',
-        AporteSolic:'',
-        IndicadoresMed:'',
-        ProcCompr:'',
-        TipoVerific:'',
-        Fecha:null,
-        TipoAct:'',
-        ideasfuerzacomunicaciones:'',
-        objdeactiv:'',
-        editing: false,
-        errors:{
-            ObjetivoEstr:"",
-            TipoAct:"",
-            objdeactiv:"",
-            DescripcionAct:"",
-            Lugar:"",
-            ProcCompr:"",
-            Fecha: ""
-        }
-        //MaterialApoyo:null
-    }
-    validateActivities = () => {
-        let errors= {}
-        let formIsValid = true
-        //let pattern = \b([0-9]|[1-9][0-9]|100)\b
-        if(!this.state.ObjetivoEstr ){
-            this.state.errors.ObjetivoEstr = "Ingrese el objetivo estretegico"
-            formIsValid = false
-          }
-      
-          if(!this.state.TipoAct ){
-            this.state.errors.TipoAct = "Ingrese el tipo de actividad"
-            formIsValid = false
-          }
-
-          if(!this.state.objdeactiv){
-            this.state.errors.objdeactiv = "20 caracteres como minimo para el objetivo de la actividad"
-            formIsValid = false
-          }
-
-          if(!this.state.DescripcionAct || this.state.DescripcionAct.length <20){
-            this.state.errors.DescripcionAct = "20 caracteres como minimo para la descripción"
-            formIsValid = false
-          }
-
-          if(!this.state.ProcCompr || (this.state.ProcCompr <0 && this.state.ProcCompr >100)){
-            this.state.errors.ProcCompr = "Ingrese el porcentaje y asegurese de que este entre los limites entre 0% y 100%"
-            formIsValid = false
-          }
-      
-          if(!this.state.Fecha ){
-            this.state.errors.Fechas = "Ingrese la fecha"
-            formIsValid = false
-          }
-      
-          if(!this.state.Lugar ){
-            this.state.errors.Lugar = "Ingrese el lugar de la reunion"
-            formIsValid = false
-          }
-          
-          this.setState({
-            errors: errors
-          })
-          if(formIsValid === false){
-            toast.error(this.state.errors.ObjetivoEstr +'\n'+
-              this.state.errors.TipoAct+'\n'+
-              this.state.errors.objdeactiv+'\n'+
-              this.state.errors.DescripcionAct+'\n'+
-              this.state.errors.ProcCompr+'\n'+
-              this.state.errors.Fechas+'\n'+
-              this.state.errors.Lugar)
-          }else{
-            document.getElementById("ActivityForm").reset();
-            toast.success("Reunión creada con exito")
-          }
-          return formIsValid
-      };
-      
-    handleFile = (file) => {
-        console.log("f", file);
-        this.setState({file: file})
-    }
-    onSubmit= async(e) =>{
-        e.preventDefault();
-        if (!this.validateActivities()){
-            return
-          }
-        const NewActivity={
-            responsableactividad: this.state.ResponsableActividad,
-            objetivoestr: this.state.ObjetivoEstr,
-            descripcionact: this.state.DescripcionAct,
-            publicoobj: this.state.PublicoObj,
-            contraparteact: this.state.ContraparteAct,
-            mecanismoconv: this.state.MecanismoConv,
-            lugar: this.state.Lugar,
-            costototal: this.state.CostoTotal,
-            aportesolic: this.state.AporteSolic,
-            indicadoresmed: this.state.IndicadoresMed,
-            proccompr: this.state.ProcCompr,
-            tipoverific: this.state.TipoVerific,
-            fecha: this.state.Fecha,
-            tipoact: this.state.TipoAct,
-            MaterialApoyo: this.state.MaterialApoyo,
-            ideasfuerzacomunicaciones:this.state.ideasfuerzacomunicaciones,
-            objdeactiv :this.state.objdeactiv
-        };
-        console.log("las actividades: ",this.props);
-        axios.post('http://localhost:4000/actividades', NewActivity/*,{
-            headers: {'content-type': 'multipart/form-data'}
-        }*/)
-        .then(response =>{
-            console.log(response.data)
-            this.setState({
-            responsableactividad:'',
-            objetivoestr:'',
-            descripcionact:'',
-            publicoobj:'',
-            contraparteact:'',
-            mecanismoconv:'',
-            lugar:'',
-            costototal:'',
-            aportesolic:'',
-            indicadoresmed:'',
-            proccompr:'',
-            tipoverific:'',
-            fecha:'',
-            tipoact:'',
-            MaterialApoyo:'',
+const ActivitiesForm = () =>{
+    const {register, handleSubmit, error} = useForm({
+        resolver: yupResolver(schema),
+    });
+    const formik = useFormik({
+        initialValues:{    
+            ResponsableActividad:'',
+            ObjetivoEstr:'',
+            DescripcionAct:'',
+            PublicoObj:'',
+            ContraparteAct:'',
+            MecanismoConv:'',
+            Lugar:'',
+            CostoTotal:'',
+            AporteSolic:'',
+            IndicadoresMed:'',
+            ProcCompr:'',
+            TipoVerific:'',
+            Fecha:null,
+            TipoAct:'',
             ideasfuerzacomunicaciones:'',
-            objdeactiv: ''
-            })
+            objdeactiv:''
+        },
+        validationSchema: Yup.Object({
+            ResponsableActividad:Yup.string().required(),
+            ObjetivoEstr: Yup.string().required(),
+            DescripcionAct: Yup.string().required(),
+            PublicoObj:'',
+            ContraparteAct:'',
+            MecanismoConv:'',
+            Lugar: Yup.string().required(),
+            CostoTotal:'',
+            AporteSolic:'',
+            IndicadoresMed:'',
+            ProcCompr:Yup.number()
+                        .min(0)
+                        .max(100)
+                        .required(),
+            TipoVerific:'',
+            Fecha: Yup.date().required(),
+            TipoAct:Yup.string().required(),
+            ideasfuerzacomunicaciones:'',
+            objdeactiv:'',
         })
-        
-        .catch(error =>{
-            console.log(error.data)
-        })
-        console.log(NewActivity)
-    }
-    
-    onInputChange = (e) => {
-        console.log("Las reuniones: ",e.target.name ,"Con el valor: ",e.target.value);
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
-    onFileChange = (e) =>{
-        console.log("Las reuniones: ",this.state.MaterialApoyo , e.target.files[0]);
-        this.setState({
-            MaterialApoyo: e.target.files[0]
-        })
-    }
-    
+    })
 
+    const submitForm = (e)=>{
 
-    render(){
+    };
+
+    render()
         return (
             <Styles>
               <div><Toaster 
@@ -193,7 +70,7 @@ export default class ActivityForms extends Component{
                     }
                 }}/>
                 </div>
-                <form id="ActivityForm" onSubmit={this.onSubmit}>
+                <form id="ActivityForm" onSubmit={handleSubmit()}>
                     <div>
                         <h2>Reporte de Actividades CRTIC</h2>
                         <p>Favor reportar todas las actividades correspondientes al centro. Ya sean estas actividades individuales, reuniones, eventos, etc.
@@ -239,7 +116,7 @@ export default class ActivityForms extends Component{
                         <option value="Entrenamiento">Entrenamiento</option>
                         <option value="Otro">Otro</option>
                     </select>
-                    <h5> objetivo estrategico</h5>
+                    <h5> Objetivo estratégico</h5>
                     <select
                     className="form-select form-select-lg mb-3" 
                     name="ObjetivoEstr"
@@ -260,13 +137,18 @@ export default class ActivityForms extends Component{
                     name="objdeactiv" 
                     value={this.state.objdeactiv} 
                     type="text"/>
-                    <h5>Descripción de la actividad / acción</h5>
-                    <input 
-                    className="h-100"
-                    onChange={this.onInputChange}
-                    name="DescripcionAct" 
-                    value={this.state.DescripcionAct} 
-                    type="text"/>
+                    <div class="col-md-12">
+                        <h5>Descripción de la actividad / acción</h5>
+                        <textarea name="DescripcionAct"
+                            cols="40"
+                            rows="5"
+                            class="form-control mt-2"
+                            aria-invalid="false"
+                            value={this.state.DescripcionAct} 
+                            onChange={this.onInputChange}
+                            placeholder="Inserte la descripción de la actividad">
+                        </textarea>
+                    </div>
                     <h5>Publico Objetivo</h5>
                     <input 
                     onChange={this.onInputChange}
@@ -392,5 +274,5 @@ export default class ActivityForms extends Component{
                 </form>
             </Styles>
         )
-    }
 }
+export default ActivitiesForm;

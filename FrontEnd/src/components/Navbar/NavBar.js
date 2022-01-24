@@ -10,7 +10,7 @@ export default class NavBar extends Component {
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark p-3">
             <div className="container">
                 <Link className="navbar-brand" to="/">
-                <img className="img-fluid w-100" src={CRTIC} alt=""/>
+                <img className="img-fluid w-100 home" src={CRTIC} alt=""/>
                 </Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -18,13 +18,13 @@ export default class NavBar extends Component {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
-                            <Link to="/FormularioActividades" className="nav-link">
-                            <img className="img-fluid w-100" src={Actividades} alt="Actividades" />
+                            <Link to="/Actividades" className="nav-link">
+                            <img className="img-fluid w-100 activities" src={Actividades} alt="Actividades" />
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/FormularioReuniones" className="nav-link">
-                            <img className="img-fluid w-100" src={Reuniones} alt=""/>
+                            <Link to="/Reuniones" className="nav-link">
+                            <img className="img-fluid w-100 reunions" src={Reuniones} alt=""/>
                             </Link>
                         </li>
                     </ul>

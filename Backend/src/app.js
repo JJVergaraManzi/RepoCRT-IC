@@ -30,11 +30,13 @@ app.use((req,res,next) => {
 
 import actividades from './routes/actividades.routes.js'
 import reuniones from './routes/reuniones.routes.js'
+import clases from './routes/clases.routes'
 
 //routes
 
 app.use('/actividades', actividades);
 app.use('/reuniones', reuniones);
+app.use('/clases', clases);
 
 //public
 

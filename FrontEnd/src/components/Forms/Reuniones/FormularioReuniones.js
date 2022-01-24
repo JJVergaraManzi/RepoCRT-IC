@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import axios from 'axios';
 import styled from "styled-components";
 import { Toaster,toast  } from "react-hot-toast";
-import  '../styles/forms/reuniones.css';
+import  '../../../styles/forms/reuniones.css';
 
 
 
@@ -15,12 +15,8 @@ const Styles = styled.div`
 `;
 
 export default class ReunionForm extends Component{    
-    async componentDidMount(){
-        if(this.props.match.params.id){
-          this.setState({
-            editing : true
-          })
-        }
+     componentDidMount(){
+       
         
 
     }
@@ -124,6 +120,7 @@ export default class ReunionForm extends Component{
         .then(response =>{
             console.log("reunion creada con exito")
             //despejando los valores
+            e.target.reset()
             
         })
         .catch(error =>{
@@ -266,22 +263,32 @@ export default class ReunionForm extends Component{
                         value={this.state.AsistentesPresentes}
                         onChange={this.onInputChange}
                         type="text" />
-                        <h5>
-                        Compromisos CRT+IC
-                        </h5>
-                        <input 
-                        name="CompromisosCRTIC" 
-                        value={this.state.CompromisosCRTIC}
-                        onChange={this.onInputChange}
-                        type="text" />
-                        <h5>
-                        Compromisos contraparte
-                        </h5>
-                        <input 
-                        name="CompromisosContraparte" 
-                        value={this.state.CompromisosContraparte}
-                        onChange={this.onInputChange}
-                        type="text" />
+                        <div class="col-md-12">
+                          <h5>Compromisos CRT+IC </h5>
+                          <textarea 
+                              cols="40"
+                              rows="5"
+                              class="form-control mt-2"
+                              aria-invalid="false"
+                              name="CompromisosCRTIC" 
+                              value={this.state.CompromisosCRTIC}
+                              onChange={this.onInputChange}
+                              placeholder="Inserte la descripción del compromiso del CRT+IC">
+                          </textarea>
+                        </div>
+                        <div class="col-md-12">
+                          <h5>Compromisos contraparte</h5>
+                          <textarea 
+                              cols="40"
+                              rows="5"
+                              class="form-control mt-2"
+                              aria-invalid="false"
+                              name="CompromisosContraparte" 
+                              value={this.state.CompromisosContraparte}
+                              onChange={this.onInputChange}
+                              placeholder="Inserte la descripción del compromiso de la contraparte">
+                          </textarea>
+                        </div>
                         <h5>
                         Tipo de verificador
                         </h5>

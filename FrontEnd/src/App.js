@@ -4,9 +4,12 @@ import { BrowserRouter , Routes,Route } from 'react-router-dom';
 
 import './App.css';
 import Home from './components/Home';
-import FormularioReuniones from './components/FormularioReuniones';
-import FormularioActividades from './components/FormularioActividades'
+import FormularioReuniones from './components/Forms/Reuniones/FormularioReuniones';
+import FormularioActividades from './components/Forms/Actividades/FormularioActividades';
+import Clases from './components/Forms/Clases/Clases';
 import NavBar from './components/Navbar/NavBar';
+import Footer from './components/Commons/Footer/Footer.js';
+import Contact from './components/Commons/Contact/Contact.js';
 
 function App() {
   return (
@@ -14,11 +17,14 @@ function App() {
         <NavBar />
         <Routes>
           <Route  path="/"  exact element={<Home />} />
-          <Route  path="/FormularioReuniones"  element={<FormularioReuniones />} />
-          <Route  path="/FormularioActividades"   element={<FormularioActividades />} />
-          <Route  path="/FormularioActividades/edit/:id"   element={<FormularioActividades />} />
-          <Route  path="/FormularioReuniones/edit/:id"   element={<FormularioReuniones />} />
+          <Route  path="/Reuniones"  element={<FormularioReuniones />} />
+          <Route  path="/Actividades"   element={<FormularioActividades />} />
+          <Route  path="/Clases"   element={<FormularioActividades />} />
+          <Route  path="/Contact"  element={<Contact />} />
+          <Route  path="/editActividades/:id"   element={<FormularioActividades />} />
+          <Route  path="/editReuniones/:id"   element={<FormularioReuniones />} />
         </Routes>
+        <Footer />
     </BrowserRouter>
   );
 }
