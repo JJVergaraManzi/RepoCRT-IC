@@ -30,7 +30,6 @@ export default class Reunions extends Component {
                 <td>{this.props.reunion.fecha}</td>
                 <td>{this.props.reunion.hora}</td>
                 <td>{this.props.reunion.lugaroformato} </td>
-                <td>{this.props.reunion.compromisoscrtic}</td>
                 <td><Link to={"/Reuniones/edit/" + this.props.reunion.id} 
                     className="btn btn-secondary">
                             Editar

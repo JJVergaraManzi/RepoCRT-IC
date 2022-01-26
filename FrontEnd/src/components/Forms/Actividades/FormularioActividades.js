@@ -2,9 +2,9 @@ import React, {Component} from "react";
 import axios from 'axios'
 import styled from "styled-components";
 import 'react-datepicker/dist/react-datepicker.css'
-import { Button } from "bootstrap";
 import '../../../styles/forms/actividades.css';
 import { Toaster,toast  } from "react-hot-toast";
+import ReactS3 from 'react-s3';
 
 const Styles = styled.div`
  background: #c93922;
@@ -12,14 +12,22 @@ const Styles = styled.div`
 
 `;
 
+const config = {
+    bucketName: 'crtic-filestorage',
+    //dirName: 'activities-documents',
+    region: 'us-east-2',
+    accessKeyId: 'AKIARNEFUJNUKGCIUAII',
+    secretAccessKey: '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',
+}
+
 export default class ActivityForms extends Component{
     async componentDidMount(){
         console.log("prueba de Formulario de actividades:  ", this.props)
-        if (this.props.match.params.id){
+        /*if (this.props.match.params.id){
                 console.log(this.props.match.params.id)
                 const res = await axios.get("http://localhost:3000/Actividades" + this.props.match.params.id);
                 console.log(res.data)
-            }
+            }*/
         }
     
     state={

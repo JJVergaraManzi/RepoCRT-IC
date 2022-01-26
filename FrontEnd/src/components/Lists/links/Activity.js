@@ -4,6 +4,7 @@ import styled from "styled-components";
 import axios from 'axios';
 import {PDFViewer} from "@react-pdf/renderer";
 import ActivitiesPDF from './PDFViewer/ActivitiesPDF';
+import Modal from './Modal/Modal';
 
 
 const Styles = styled.div`
@@ -13,15 +14,47 @@ card {
 } 
 `;
 
+const format = (date, locale, options) =>{
+    new Intl.DateTimeFormat(locale,options).format(date)
+}
+const now = new Date()
+
 
 export default class Activity extends Component {
-    state={
-        showPDF: false
+    constructor(){
+        super();
+        this.state={
+            showPDF: false,
+            showModal: false
+        };
+        //Show Data Modal
+        this.showModal = this.showModal.bind(this);
+        this.hideModal = this.hideModal.bind(this);
+        //Show PDF Modal
+        this.showModalPDF = this.showModal.bind(this);
+        this.hideModalPDF = this.hideModal.bind(this);
     }
-
     componentDidMount(){
         console.log("prueba de actividades ", this.props)
+        console.log(now);
     }
+
+    //display ans close Modal
+    showModal = () => {
+        this.setState({ showModal: true });
+      };
+    
+    hideModal = () => {
+        this.setState({ showModal: false });
+      };
+    //display ans close Modal
+    showModalPDF = () => {
+        this.setState({ showPDF: true });
+    };
+
+    hideModalPDF = () => {
+        this.setState({ showPDF: false });
+    };
 
     //Delete row
     deleteActivity = async (activityId) =>{
@@ -43,23 +76,8 @@ export default class Activity extends Component {
                     <td>{this.props.activity.objetivoestr}</td>
                     <td>{this.props.activity.fecha}</td>
                     <td>{this.props.activity.lugar}</td>
-                    <td>{this.props.activity.mecanismoconv}</td>
                 
-                        {/*<h4>Responsable de la actividad: {this.props.activity.responsableactividad}</h4>
-                        <p> Objetivo estratégico: {this.props.activity.objetivoestr}</p>
-                        <p>Descripción de la actividad: {this.props.activity.descripcionact}</p>
-                        <p>Publico objetivo: {this.props.activity.publicoobj}</p>
-                        Contraparte de la actividad: {this.props.activity.contraparteact}
-                        <p>Mecanismo: {this.props.activity.mecanismoconv}
-                        <p>Lugar de la actividad: {this.props.activity.lugar}</p>
-                        <p>Costo total de la actividad: {this.props.activity.costototal}$</p>
-                        <p>Aportes solicitados: {this.props.activity.aportesolic}$</p>
-                        <p>Indicadores de medicion: {this.props.activity.indicadoresmed}</p>
-                        <p>Porcentaje comprometido de Cumplimiento: {this.props.activity.proccompr}%</p>
-                        <p>Tipo de verificación: {this.props.activity.tipoverific}</p>
-                        <p>Fecha de realización: {this.props.activity.fecha}</p>
-                        <p>Tipo de actividad: {this.props.activity.tipoact}</p>
-                        </p>*/}
+                    
                     <td>   
                         <Link to={`/Actividades/edit/${this.props.activity.id}`} className="btn btn-secondary">
                                 Editar
@@ -86,7 +104,12 @@ export default class Activity extends Component {
                         </button>
                     </td>
                     <td>
-                    
+                    <Modal show={this.state.showModal} handleClose={this.hideModal}>
+                        <p>Modal</p>
+                    </Modal>
+                    <button type="button" onClick={this.showModal}>
+                        Open
+                    </button>
                     </td> 
                 </tr>
         )

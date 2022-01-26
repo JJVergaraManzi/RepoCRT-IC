@@ -38,6 +38,12 @@ app.use('/actividades', actividades);
 app.use('/reuniones', reuniones);
 app.use('/clases', clases);
 
+//servidor de S3 para imagenes
+
+app.get('s3Url', (req,res)=>{
+    
+})
+
 //public
 
 //app.use(express.static('../public'));
