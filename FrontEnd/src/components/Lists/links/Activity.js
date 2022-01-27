@@ -25,14 +25,20 @@ export default class Activity extends Component {
         super();
         this.state={
             showPDF: false,
-            showModal: false
+            showModal: false,
+            showModalEdit: false
         };
         //Show Data Modal
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
+
         //Show PDF Modal
-        this.showModalPDF = this.showModal.bind(this);
-        this.hideModalPDF = this.hideModal.bind(this);
+        this.showModalPDF = this.showModalPDF.bind(this);
+        this.hideModalPDF = this.hideModalPDF.bind(this);
+        
+        //Show PDF Modal
+        this.showModalEdit = this.showModalEdit.bind(this);
+        this.hideModalEdit = this.hideModalEdit.bind(this);
     }
     componentDidMount(){
         console.log("prueba de actividades ", this.props)
@@ -47,6 +53,7 @@ export default class Activity extends Component {
     hideModal = () => {
         this.setState({ showModal: false });
       };
+
     //display ans close Modal
     showModalPDF = () => {
         this.setState({ showPDF: true });
@@ -54,6 +61,15 @@ export default class Activity extends Component {
 
     hideModalPDF = () => {
         this.setState({ showPDF: false });
+    };
+
+    //display ans close Modal
+    showModalEdit = () => {
+        this.setState({ showModalEdit: true });
+    };
+
+    hideModalEdit = () => {
+        this.setState({ showModalEdit: false });
     };
 
     //Delete row
@@ -76,12 +92,20 @@ export default class Activity extends Component {
                     <td>{this.props.activity.objetivoestr}</td>
                     <td>{this.props.activity.fecha}</td>
                     <td>{this.props.activity.lugar}</td>
-                
-                    
-                    <td>   
-                        <Link to={`/Actividades/edit/${this.props.activity.id}`} className="btn btn-secondary">
+                    {/*Modal Pop up for the Update in the CRUD*/}
+                    <td>
+                        <Modal show={this.state.showModalEdit} handleClose={this.hideModalEdit}>
+                            <div>
+                                <form>
+                                    <input 
+                                    name="objdeactiv" 
+                                    type="text"/>
+                                </form>
+                            </div>
+                        </Modal>  
+                        <button type="button" className="btn btn-primary">
                                 Editar
-                        </Link>
+                        </button>
                     </td>
                     
                     <td>
@@ -105,10 +129,25 @@ export default class Activity extends Component {
                     </td>
                     <td>
                     <Modal show={this.state.showModal} handleClose={this.hideModal}>
-                        <p>Modal</p>
+                        <p>{this.props.activity.responsableactividad}</p>
+                        <p>{this.props.activity.objetivoestr}</p>
+                        <p>{this.props.activity.descripcionact}</p>
+                        <p>{this.props.activity.publicoobj}</p>
+                        <p>{this.props.activity.contraparteact}</p>
+                        <p>{this.props.activity.mecanismoconv}</p>
+                        <p>{this.props.activity.lugar}</p>
+                        <p>{this.props.activity.costototal}</p>
+                        <p>{this.props.activity.aportesolic}</p>
+                        <p>{this.props.activity.indicadoresmed}</p>
+                        <p>{this.props.activity.proccompr}</p>
+                        <p>{this.props.activity.tipoverific}</p>
+                        <p>{this.props.activity.fecha}</p>
+                        <p>{this.props.activity.tipoact}</p>
+                        <p>{this.props.activity.ideasfuerzacomunicaciones}</p>
+                        <p>{this.props.activity.objdeactiv}</p>
                     </Modal>
-                    <button type="button" onClick={this.showModal}>
-                        Open
+                    <button type="button" className="btn btn-secondary" onClick={this.showModal}>
+                        Ver
                     </button>
                     </td> 
                 </tr>

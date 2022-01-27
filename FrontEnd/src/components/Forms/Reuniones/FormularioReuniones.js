@@ -129,8 +129,6 @@ export default class ReunionForm extends Component{
         .then(response =>{
             console.log("reunion creada con exito")
             //despejando los valores
-            e.target.reset()
-            
         })
         .catch(error =>{
             console.log(error.data)

@@ -1,29 +1,17 @@
 import axios from "axios";
 import React, { Component } from 'react';
 import Reunions from './links/Reunions';
+import DownloadReunions from "./DownloadExcel/DownloadReunions";
 
 export default class ActivityList extends Component{
-    constructor(){
-        super();
-        this.state={
-            reunions: [],
-            show: false
-        };
-        this.showModal = this.showModal.bind(this);
-        this.hideModal = this.hideModal.bind(this);
+    state={
+        reunions: []
     }
+
     async componentDidMount(){
         console.log("Log de prueba para activityLists: ",this.props.lista)
         
     }
-
-    showModal = () => {
-        this.setState({ show: true });
-      };
-    
-      hideModal = () => {
-        this.setState({ show: false });
-      };
 
     deleteReunion = async (ReunionsId) =>{
         await axios.delete('http://localhost:4000/reuniones/'+ ReunionsId);
@@ -42,6 +30,11 @@ export default class ActivityList extends Component{
                         className="form-control ms-auto"
                         placeholder="Busque su Reunión"
                         />
+                    </div>
+                    <div>
+                        <DownloadReunions>
+                            Descargar Excel de la tabla.
+                        </DownloadReunions>
                     </div>
                     </form>
 
