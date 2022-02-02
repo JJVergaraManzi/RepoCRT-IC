@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import CRTIC from '../../assets/crtic.jpg'
 import Actividades from '../../assets/actividades.png'
 import Reuniones from '../../assets/reuniones.png'
+import Unreal from '../../assets/unreal.jpg'
 
 export default class NavBar extends Component {
     render() {
@@ -25,6 +26,11 @@ export default class NavBar extends Component {
                         <li className="nav-item">
                             <Link to="/Reuniones" className="nav-link">
                             <img className="img-fluid w-100 reunions" src={Reuniones} alt=""/>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/Clases" className="nav-link">
+                                Registro de clases
                             </Link>
                         </li>
                     </ul>

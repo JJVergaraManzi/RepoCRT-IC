@@ -109,7 +109,9 @@ export default class Activity extends Component {
                     </td>
                     
                     <td>
-                        <button className="btn btn-danger" 
+                        <button 
+                        className="trash alternate outline icon"
+                        style={{color: "red", marginTop:" 7px",marginLeft:"10px"}}
                             onClick={() => this.deleteActivity(this.props.activity.id)}>
                             Eliminar
                         </button>

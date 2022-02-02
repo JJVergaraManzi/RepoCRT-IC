@@ -22,11 +22,9 @@ const config = {
 }
 
 export default class ReunionForm extends Component{    
-     componentDidMount(){
-      console.log("Variable de entorno", process.env.REACT_APP_BUCKET_NAME)       
-        
-
+     componentDidMount(){    
     }
+    
     state={
         ResponsableReunion:'',
         Modalidad:'',
@@ -138,11 +136,11 @@ export default class ReunionForm extends Component{
         uploadFile( this.state.VerificadorArchivo[0], config)
         .then( (data)=>{
           console.log("datos de S3: ", data);
+          this.props.history.push("/");
         })
         .catch((err) =>{
           alert("alerta de S3", err);
         })
-        return(<Navigate to ='/Reuniones' />)
     }
 
     onFileChange = (e) =>{
@@ -187,14 +185,15 @@ export default class ReunionForm extends Component{
                         Favor completar todos los que apliquen para el tipo de reunión.
                         Gracias por ayudar a que el CRT+IC salga adelante.</p>
                         </div>
-                        <h5>Responsable de la reunión
+                        <h5>
+                        Responsable de la reunión
+                        </h5>
                         <input 
                         name="ResponsableReunion" 
                         value={this.state.ResponsableReunion}
                         error={this.state.errors.ResponsableReunion}
                         onChange={this.onInputChange}
                         type="text" />
-                        </h5>
                         <h5>
                         Modalidad
                         </h5>
@@ -235,6 +234,7 @@ export default class ReunionForm extends Component{
                         </h5>
                         <input 
                         name="Objetivo" 
+                        error={this.state.errors.Objetivo} 
                         value={this.state.Objetivo}
                         onChange={this.onInputChange}
                         type="text" />

@@ -1,24 +1,30 @@
 import axios from "axios";
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Reunions from './links/Reunions';
 import DownloadReunions from "./DownloadExcel/DownloadReunions";
 
-export default class ActivityList extends Component{
-    state={
+ const ReunionsList = (props)=>{
+    const [data, setData] =useState(props.lista);
+    const [query, setQuery] =useState('')
+    /*state={
         reunions: []
     }
 
     async componentDidMount(){
-        console.log("Log de prueba para activityLists: ",this.props.lista)
+        console.log("Log de prueba para activityLists: ",this.props.lista, this.state.reunions)
         
     }
 
     deleteReunion = async (ReunionsId) =>{
         await axios.delete('http://localhost:4000/reuniones/'+ ReunionsId);
         window.location.href = '/';
+    }*/
+
+    const handleChange = (event) => {
+        setQuery(event.target.value);
+        setData(props.lista.filter(elem => elem.responsablereunion.toLowerCase().startsWith(event.target.value)));
     }
 
-    render(){
         return(
             <div className="d-flex flex-row">
                 <div className="row g-3 ms-auto">
@@ -26,14 +32,16 @@ export default class ActivityList extends Component{
                     <form className="row g-3 ms-auto">
                     <div className="col-auto">
                         <input
+                        defaultValue={''}
+                        value={query}
+                        onChange={(e) => handleChange(e)}
                         type="text"
                         className="form-control ms-auto"
                         placeholder="Busque su Reunión"
                         />
                     </div>
                     <div>
-                        <DownloadReunions>
-                            Descargar Excel de la tabla.
+                        <DownloadReunions excelData={props.lista}>
                         </DownloadReunions>
                     </div>
                     </form>
@@ -52,7 +60,7 @@ export default class ActivityList extends Component{
                             </tr>
                         </thead>
                         <tbody>
-                            {this.props.lista.map(reunion =>(
+                            {data.map(reunion =>(
                                     <Reunions key={reunion.id} reunion={reunion}/>
 
                             ))}
@@ -61,5 +69,5 @@ export default class ActivityList extends Component{
                 </div>
             </div>
         )
-    }
 }
+export default ReunionsList;

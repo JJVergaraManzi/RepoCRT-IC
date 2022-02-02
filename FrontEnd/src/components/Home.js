@@ -16,13 +16,11 @@ class Home extends Component {
 
   componentDidMount = async () => {
     const res = await axios.get('http://localhost:4000/actividades')
-    //console.log("primer log: ", res.data.data[0].attributes)
     this.setState({
         activities : res.data.actividades
     });
     console.log("Log de actividades",this.state.activities)
     const aux = await axios.get('http://localhost:4000/reuniones')
-    //console.log("primer log: ", res.data.data[0].attributes)
     this.setState({
       reunions : aux.data.reuniones
     });

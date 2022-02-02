@@ -19,7 +19,7 @@ function App() {
           <Route  path="/"  exact element={<Home />} />
           <Route  path="/Reuniones"  element={<FormularioReuniones />} />
           <Route  path="/Actividades"   element={<FormularioActividades />} />
-          <Route  path="/Clases"   element={<FormularioActividades />} />
+          <Route  path="/Clases"   element={<Clases />} />
           <Route  path="/Contact"  element={<Contact />} />
           <Route  path="/editActividades/:id"   element={<FormularioActividades />} />
           <Route  path="/editReuniones/:id"   element={<FormularioReuniones />} />
