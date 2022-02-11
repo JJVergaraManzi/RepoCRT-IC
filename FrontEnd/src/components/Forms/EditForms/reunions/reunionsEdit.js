@@ -2,9 +2,7 @@ import React, {Component} from "react";
 import axios from 'axios';
 import styled from "styled-components";
 import { Toaster,toast  } from "react-hot-toast";
-import { Navigate } from 'react-router-dom';
-import  '../../../styles/forms/reuniones.css';
-import {uploadFile} from 'react-s3';
+import  '../../../../styles/forms/reuniones.css';
 import 'react-datepicker/dist/react-datepicker.css'
 
 const Styles = styled.div`
@@ -13,99 +11,56 @@ const Styles = styled.div`
 
 `;
 
-const config = {
-  bucketName: 'crtic-filestorage',
-  //dirName: 'reunions',
-  region: 'us-east-2',
-  accessKeyId: 'AKIARNEFUJNUKGCIUAII',
-  secretAccessKey: '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',
-}
-
-export default class ReunionForm extends Component{    
-     componentDidMount(){    
-    }
-    
-    state={
-        ResponsableReunion:'',
-        Modalidad:'',
-        Fecha: '',
-        Hora:'',
-        Objetivo:'',
-        Minuta:'',
-        Contraparte:'',
-        LugarOFormato:'',
-        AsistentesInvitados:'',
-        AsistentesPresentes:'',
-        CompromisosCRTIC:'',
-        CompromisosContraparte:'',
-        VerificadorTipo:'',
-        VerificadorArchivo:null,
-        TresIdeas:'',
-        editing: false,
-        errors:{
+export default class ReunionsEdit extends Component{
+   state={
             ResponsableReunion:'',
             Modalidad:'',
-            Fechas:'',
+            Fecha: '',
             Hora:'',
-            Minuta:''
-          }
-    }
-    validateReunions = () => {
-        let error= {}
-        let formIsValid = true
-        if(!this.state.ResponsableReunion || this.state.ResponsableReunion.length <3){
-            error.ResponsableReunion = "3 caracteres como minimo para el responsable"
-            formIsValid = false
-          }
-      
-          if(!this.state.Modalidad || this.state.Modalidad.length <3){
-            error.Modalidad = "3 caracteres como minimo para la modalidad"
-            formIsValid = false
-          }
-      
-          if(!this.state.Fecha ){
-            error.Fechas = "Ingrese la fecha"
-            formIsValid = false
-          }
-      
-          if(!this.state.Hora ){
-            error.Hora = "Ingrese la hora"
-            formIsValid = false
-          }
-      
-          if(!this.state.Minuta ){
-            error.Minuta = "¡Ingrese la minuta, por favor!"
-            formIsValid = false
-          }
-      
-          this.setState({
-            errors: error
-          })
-          if(formIsValid === false){
-          toast.error(
-            error.ResponsableReunion +'\n'+ 
-            error.Modalidad +'\n'+ 
-            error.Fechas+'\n'+ 
-            error.Hora+'\n'+ 
-            error.Minuta
-            )
-          return formIsValid
-        }else{
-          toast.success(
-            "Reunion creada con exito"
-            )
-            document.getElementById("ReunionForm").reset();
-            return formIsValid
+            Objetivo:'',
+            Minuta:'',
+            Contraparte:'',
+            LugarOFormato:'',
+            AsistentesInvitados:'',
+            AsistentesPresentes:'',
+            CompromisosCRTIC:'',
+            CompromisosContraparte:'',
+            VerificadorTipo:'',
+            VerificadorArchivo:null,
+            TresIdeas:'',
         }
-      };
-    onSubmit= async(e) =>{
 
+    componentDidMount = async() =>{
+        if(this.props.match.params.id){
+            const res = await axios.get('http://localhost:4000/actualizarReuniones/' + this.props.match.params.id).
+            then(result =>{
+                this.setState({
+                    responsablereunion:res.data.ResponsableReunion,
+                    modalidad:res.data.Modalidad,
+                    fecha: res.data.Fecha,
+                    hora:res.data.Hora,
+                    objetivo:res.data.Objetivo,
+                    minuta:res.data.Minuta,
+                    contraparte:res.data.Contraparte,
+                    lugaroformato:res.data.LugarOFormato,
+                    asistentesinvitados:res.data.AsistentesInvitados,
+                    asistentespresentes:res.data.AsistentesPresentes,
+                    compromisoscrtic:res.data.CompromisosCRTIC,
+                    compromisoscontraparte:res.data.CompromisosContraparte,
+                    verificadortipo:res.data.VerificadorTipo,
+                    tresideas:res.data.TresIdeas 
+                })
+                .catch(error=>{
+                    console.log(error);
+                })
+            });
+            console.log("res.data:",res.data);
+        }
+    }
+    
+    update = async(e) =>{
         e.preventDefault();
-        if (!this.validateReunions()){
-            return
-          }
-
-        const NewReunion={
+        const UpdatedReunion={
             responsablereunion:this.state.ResponsableReunion,
             modalidad:this.state.Modalidad,
             fecha: this.state.Fecha,
@@ -119,51 +74,18 @@ export default class ReunionForm extends Component{
             compromisoscrtic:this.state.CompromisosCRTIC,
             compromisoscontraparte:this.state.CompromisosContraparte,
             verificadortipo:this.state.VerificadorTipo,
-            tresideas:this.state.TresIdeas, 
+            tresideas:this.state.TresIdeas 
         };
 
-        const first_res = await axios.post("http://localhost:4000/reuniones",NewReunion
-        )
+        const res = await axios.put("http://localhost:4000/reuniones",UpdatedReunion)
         .then(response =>{
             console.log("reunion creada con exito")
-            //despejando los valores
         })
         .catch(error =>{
             console.log(error.data)
         })
-        console.log(NewReunion)
-
-        uploadFile( this.state.VerificadorArchivo[0], config)
-        .then( (data)=>{
-          console.log("datos de S3: ", data);
-          this.props.history.push("/");
-        })
-        .catch((err) =>{
-          alert("alerta de S3", err);
-        })
+        console.log(UpdatedReunion)
     }
-
-    onFileChange = (e) =>{
-        console.log("El archivo es: ",e.target.files[0]);
-        this.setState({
-            VerificadorArchivo: e.target.files[0]
-        })
-    }
-
-    onChangeDate = fecha => {
-        this.setState({ fecha });
-    }
-
-    resetValue = (e) =>{
-      console.log("el valor del state: ", e.target.name, "Ahora tiene un valor de: ", e.target.value)
-    }
-    
-    onInputChange = (e) => {
-        console.log("Las reuniones: ",e.target.name ,"Con el valor: ",e.target.value);
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    };
     render(){
         return(
             <Styles>
@@ -191,7 +113,6 @@ export default class ReunionForm extends Component{
                         <input 
                         name="ResponsableReunion" 
                         value={this.state.ResponsableReunion}
-                        error={this.state.errors.ResponsableReunion}
                         onChange={this.onInputChange}
                         type="text" />
                         <h5>
@@ -201,8 +122,7 @@ export default class ReunionForm extends Component{
                         className="form-select form-select-lg mb-3"  
                         name="Modalidad" 
                         selected={this.state.Modalidad}
-                        onChange={this.onInputChange}
-                        error={this.state.errors.Modalidad}>
+                        onChange={this.onInputChange}>
                             <option >Seleccione la modalidad</option>              
                             <option value="Reunion Prescencial">Reunion Prescencial</option>
                             <option value="Reunion Virtual (Conferencia)">Reunion Virtual (Conferencia)</option>
@@ -216,15 +136,13 @@ export default class ReunionForm extends Component{
                         <input 
                         name="Fecha"
                         type="date" 
-                        selected={this.state.Fecha}
-                        error={this.state.errors.Fecha} 
+                        selected={this.state.Fecha} 
                         onChange={this.onInputChange} />
                         <h5>
                         Hora
                         </h5>
                         <input 
                         name="Hora"
-                        error={this.state.errors.Hora}
                         onChange={this.onInputChange} 
                         type="time" 
                         min="00:00" 
@@ -233,8 +151,7 @@ export default class ReunionForm extends Component{
                         Objetivo de la reunión
                         </h5>
                         <input 
-                        name="Objetivo" 
-                        error={this.state.errors.Objetivo} 
+                        name="Objetivo"  
                         value={this.state.Objetivo}
                         onChange={this.onInputChange}
                         type="text" />
@@ -245,7 +162,6 @@ export default class ReunionForm extends Component{
                         name="Minuta" 
                         value={this.state.Minuta}
                         onChange={this.onInputChange}
-                        error={this.state.errors.Minuta}
                         type="text" />
                         <h5>
                         Lugar o Formato

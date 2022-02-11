@@ -32,10 +32,10 @@ import logoCorfo from '../../../assets/logoCorfo.png'
                     </ul>
                     <ul className='col-12 col-md-4 list-unstyled'>
                         <li className='text-center'>
-                            ¿Quiere Contactarnos? 
+                            ¿Quiere escribirnos? 
                             <li>
                             <Link to={`/Contact`}>
-                                ¡Contactenos!
+                                ¡Contactenos en esta dirección!
                             </Link>
                             </li>
                         </li>

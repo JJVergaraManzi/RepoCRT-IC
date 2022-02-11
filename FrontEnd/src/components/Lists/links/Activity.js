@@ -14,11 +14,6 @@ card {
 } 
 `;
 
-const format = (date, locale, options) =>{
-    new Intl.DateTimeFormat(locale,options).format(date)
-}
-const now = new Date()
-
 
 export default class Activity extends Component {
     constructor(){
@@ -42,10 +37,9 @@ export default class Activity extends Component {
     }
     componentDidMount(){
         console.log("prueba de actividades ", this.props)
-        console.log(now);
     }
 
-    //display ans close Modal
+    //display and close Modal
     showModal = () => {
         this.setState({ showModal: true });
       };
@@ -54,7 +48,7 @@ export default class Activity extends Component {
         this.setState({ showModal: false });
       };
 
-    //display ans close Modal
+    //display and close Modal
     showModalPDF = () => {
         this.setState({ showPDF: true });
     };
@@ -63,7 +57,7 @@ export default class Activity extends Component {
         this.setState({ showPDF: false });
     };
 
-    //display ans close Modal
+    //display and close Modal
     showModalEdit = () => {
         this.setState({ showModalEdit: true });
     };
@@ -94,18 +88,11 @@ export default class Activity extends Component {
                     <td>{this.props.activity.lugar}</td>
                     {/*Modal Pop up for the Update in the CRUD*/}
                     <td>
-                        <Modal show={this.state.showModalEdit} handleClose={this.hideModalEdit}>
-                            <div>
-                                <form>
-                                    <input 
-                                    name="objdeactiv" 
-                                    type="text"/>
-                                </form>
-                            </div>
-                        </Modal>  
-                        <button type="button" className="btn btn-primary">
-                                Editar
-                        </button>
+                    <td><Link to={"/actualizarActividades/" + this.props.activity.id} 
+                    className="btn btn-primary">
+                            Editar
+                    </Link>
+                    </td> 
                     </td>
                     
                     <td>
@@ -131,22 +118,22 @@ export default class Activity extends Component {
                     </td>
                     <td>
                     <Modal show={this.state.showModal} handleClose={this.hideModal}>
-                        <p>{this.props.activity.responsableactividad}</p>
-                        <p>{this.props.activity.objetivoestr}</p>
-                        <p>{this.props.activity.descripcionact}</p>
-                        <p>{this.props.activity.publicoobj}</p>
-                        <p>{this.props.activity.contraparteact}</p>
-                        <p>{this.props.activity.mecanismoconv}</p>
-                        <p>{this.props.activity.lugar}</p>
-                        <p>{this.props.activity.costototal}</p>
-                        <p>{this.props.activity.aportesolic}</p>
-                        <p>{this.props.activity.indicadoresmed}</p>
-                        <p>{this.props.activity.proccompr}</p>
-                        <p>{this.props.activity.tipoverific}</p>
-                        <p>{this.props.activity.fecha}</p>
-                        <p>{this.props.activity.tipoact}</p>
-                        <p>{this.props.activity.ideasfuerzacomunicaciones}</p>
-                        <p>{this.props.activity.objdeactiv}</p>
+                        <h1>Responsable de la actividad: {this.props.activity.responsableactividad}</h1>
+                        <h2>Objetivo estratégico:{this.props.activity.objetivoestr}</h2>
+                        <p>Descripción de la actividad:{this.props.activity.descripcionact}</p>
+                        <p>Publico objetivo:{this.props.activity.publicoobj}</p>
+                        <p>Contraparte de la actividad{this.props.activity.contraparteact}</p>
+                        <p>Mecanismo de convocatoria/ selección:{this.props.activity.mecanismoconv}</p>
+                        <p>Lugar de la actividad:{this.props.activity.lugar}</p>
+                        <p>Costo total:{this.props.activity.costototal}</p>
+                        <p>Aporte solicitado:{this.props.activity.aportesolic}</p>
+                        <p>Indicadores de medición:{this.props.activity.indicadoresmed}</p>
+                        <p>Porcentaje comprometido:{this.props.activity.proccompr}%</p>
+                        <p>Tipo de verificación:{this.props.activity.tipoverific}</p>
+                        <p>Fecha:{this.props.activity.fecha}</p>
+                        <p>Tipo de actividad:{this.props.activity.tipoact}</p>
+                        <p>Ideas de fuerza para la comunicación:{this.props.activity.ideasfuerzacomunicaciones}</p>
+                        <p>Objetivo de la actividad:{this.props.activity.objdeactiv}</p>
                     </Modal>
                     <button type="button" className="btn btn-secondary" onClick={this.showModal}>
                         Ver

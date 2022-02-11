@@ -101,7 +101,8 @@ export const updateReuniones = async (req, res) => {
         });
            res.json({
             message: 'Reunión actualizada correctamente',
-            resultado: true
+            resultado: true,
+            reunion: reunionUpdate
         });
        }catch(e){
             console.log(e);

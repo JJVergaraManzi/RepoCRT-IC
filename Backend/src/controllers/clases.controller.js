@@ -66,7 +66,8 @@ export const updateClases = async (req, res) =>{
         });
         res.json({
             message: 'Clase actualizada correctamente',
-            resultado: true
+            resultado: true,
+            clases: clasesUpdate
         });
     }catch(e){
         console.log(e);

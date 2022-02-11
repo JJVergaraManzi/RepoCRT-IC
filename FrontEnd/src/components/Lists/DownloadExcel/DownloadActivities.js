@@ -7,10 +7,10 @@ const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
 export default class DownloadActivities extends Component{
     componentDidMount= async ()=>{
-        console.log("datos para el excel de reuniones: ",this.props, this.props.excelData);
+        console.log("datos para el excel de actividades: ",this.props, this.props.excelData);
     }
     render() {
-        console.log("datos para el excel de reuniones: ",this.props.excelData.modalidad, this.props.excelData);
+        console.log("datos para el excel de actividades: ",this.props.excelData.modalidad, this.props.excelData);
         return (
             <ExcelFile element={<button className="btn btn-primary" >Descargar reuniones</button>}>
                 <ExcelSheet data={this.props.excelData} name="Reuniones">

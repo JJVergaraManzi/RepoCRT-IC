@@ -103,7 +103,8 @@ export const updateActividades = async (req, res) => {
         });
            res.json({
             message: 'Actividad actualizada correctamente',
-            resultado: true
+            resultado: true,
+            actividad: actividadUpdate
         });
        }catch(e){
             console.log(e);

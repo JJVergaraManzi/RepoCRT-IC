@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import axios from 'axios'
 import styled from "styled-components";
 import 'react-datepicker/dist/react-datepicker.css'
-import '../../../styles/forms/actividades.css';
+import '../../../../styles/forms/actividades.css';
 import { Toaster,toast  } from "react-hot-toast";
 import ReactS3 from 'react-s3';
 
@@ -12,120 +12,32 @@ const Styles = styled.div`
 
 `;
 
-const config = {
-    bucketName: 'crtic-filestorage',
-    //dirName: 'activities-documents',
-    region: 'us-east-2',
-    accessKeyId: 'AKIARNEFUJNUKGCIUAII',
-    secretAccessKey: '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',
-}
+export default class ActivitiesEdit extends Component{
+        state={
+            _id:'',
+            ResponsableActividad:'',
+            ObjetivoEstr:'',
+            DescripcionAct:'',
+            PublicoObj:'',
+            ContraparteAct:'',
+            MecanismoConv:'',
+            Lugar:'',
+            CostoTotal:'',
+            AporteSolic:'',
+            IndicadoresMed:'',
+            ProcCompr:'',
+            TipoVerific:'',
+            Fecha:null,
+            TipoAct:'',
+            ideasfuerzacomunicaciones:'',
+            objdeactiv:'',
+            editing: false
+        };
 
-export default class ActivityForms extends Component{
-    async componentDidMount(){
-        console.log("prueba de Formulario de actividades:  ", this.props)
-        /*if (this.props.match.params.id){
-                console.log(this.props.match.params.id)
-                const res = await axios.get("http://localhost:3000/Actividades" + this.props.match.params.id);
-                console.log(res.data)
-            }*/
-        }
-    
-    state={
-        ResponsableActividad:'',
-        ObjetivoEstr:'',
-        DescripcionAct:'',
-        PublicoObj:'',
-        ContraparteAct:'',
-        MecanismoConv:'',
-        Lugar:'',
-        CostoTotal:'',
-        AporteSolic:'',
-        IndicadoresMed:'',
-        ProcCompr:'',
-        TipoVerific:'',
-        Fecha:null,
-        TipoAct:'',
-        ideasfuerzacomunicaciones:'',
-        objdeactiv:'',
-        editing: false,
-        errors:{
-            ObjetivoEstr:"",
-            TipoAct:"",
-            objdeactiv:"",
-            DescripcionAct:"",
-            Lugar:"",
-            ProcCompr:"",
-            Fecha: ""
-        }
-        //MaterialApoyo:null
-    }
-    validateActivities = () => {
-        let errors= {}
-        let formIsValid = true
-        //let pattern = \b([0-9]|[1-9][0-9]|100)\b
-        if(!this.state.ObjetivoEstr ){
-            this.state.errors.ObjetivoEstr = "Ingrese el objetivo estretegico"
-            formIsValid = false
-          }
-      
-          if(!this.state.TipoAct ){
-            this.state.errors.TipoAct = "Ingrese el tipo de actividad"
-            formIsValid = false
-          }
-
-          if(!this.state.objdeactiv){
-            this.state.errors.objdeactiv = "20 caracteres como minimo para el objetivo de la actividad"
-            formIsValid = false
-          }
-
-          if(!this.state.DescripcionAct || this.state.DescripcionAct.length <20){
-            this.state.errors.DescripcionAct = "20 caracteres como minimo para la descripción"
-            formIsValid = false
-          }
-
-          if(!this.state.ProcCompr || (this.state.ProcCompr <0 && this.state.ProcCompr >100)){
-            this.state.errors.ProcCompr = "Ingrese el porcentaje y asegurese de que este entre los limites entre 0% y 100%"
-            formIsValid = false
-          }
-      
-          if(!this.state.Fecha ){
-            this.state.errors.Fechas = "Ingrese la fecha"
-            formIsValid = false
-          }
-      
-          if(!this.state.Lugar ){
-            this.state.errors.Lugar = "Ingrese el lugar de la reunion"
-            formIsValid = false
-          }
-          
-          this.setState({
-            errors: errors
-          })
-          if(formIsValid === false){
-            toast.error(this.state.errors.ObjetivoEstr +'\n'+
-              this.state.errors.TipoAct+'\n'+
-              this.state.errors.objdeactiv+'\n'+
-              this.state.errors.DescripcionAct+'\n'+
-              this.state.errors.ProcCompr+'\n'+
-              this.state.errors.Fechas+'\n'+
-              this.state.errors.Lugar)
-          }else{
-            document.getElementById("ActivityForm").reset();
-            toast.success("Reunión creada con exito")
-          }
-          return formIsValid
-      };
-      
-    handleFile = (file) => {
-        console.log("f", file);
-        this.setState({file: file})
-    }
-    onSubmit= async(e) =>{
+    onSubmit = async(e) =>{
         e.preventDefault();
-        /*if (!this.validateActivities()){
-            return
-          }*/
-        const NewActivity={
+            
+        const updatedActivity={
             responsableactividad: this.state.ResponsableActividad,
             objetivoestr: this.state.ObjetivoEstr,
             descripcionact: this.state.DescripcionAct,
@@ -142,58 +54,10 @@ export default class ActivityForms extends Component{
             tipoact: this.state.TipoAct,
             MaterialApoyo: this.state.MaterialApoyo,
             ideasfuerzacomunicaciones:this.state.ideasfuerzacomunicaciones,
-            objdeactiv :this.state.objdeactiv
-        };
-        console.log("las actividades: ",this.props);
-        axios.post('http://localhost:4000/actividades', NewActivity/*,{
-            headers: {'content-type': 'multipart/form-data'}
-        }*/)
-        .then(response =>{
-            console.log(response.data)
-            this.setState({
-            responsableactividad:'',
-            objetivoestr:'',
-            descripcionact:'',
-            publicoobj:'',
-            contraparteact:'',
-            mecanismoconv:'',
-            lugar:'',
-            costototal:'',
-            aportesolic:'',
-            indicadoresmed:'',
-            proccompr:'',
-            tipoverific:'',
-            fecha:'',
-            tipoact:'',
-            MaterialApoyo:'',
-            ideasfuerzacomunicaciones:'',
-            objdeactiv: ''
-            })
-            e.target.reset()
-            toast.success('Actividad creada con exito con exito')
-        })
+            objdeactiv:this.state.objdeactiv
+            };
+        }
         
-        .catch(error =>{
-            console.log(error.data)
-        })
-        console.log(NewActivity)
-    }
-    
-    onInputChange = (e) => {
-        console.log("Las reuniones: ",e.target.name ,"Con el valor: ",e.target.value);
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
-    onFileChange = (e) =>{
-        console.log("Las reuniones: ",this.state.MaterialApoyo , e.target.files[0]);
-        this.setState({
-            MaterialApoyo: e.target.files[0]
-        })
-    }
-    
-
-
     render(){
         return (
             <Styles>

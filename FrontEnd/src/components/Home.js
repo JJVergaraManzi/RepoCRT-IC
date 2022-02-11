@@ -11,6 +11,7 @@ class Home extends Component {
   state= {
     activities: [],
     reunions: [],
+    clases:[],
     error: null,
   };
 
@@ -25,7 +26,11 @@ class Home extends Component {
       reunions : aux.data.reuniones
     });
     console.log("Log de reuniones",this.state.reunions)
-  
+    const aux1 = await axios.get('http://localhost:4000/clases')
+    this.setState({
+      clases : aux1.data.clases
+    });
+    console.log("Log de clases",this.state.clases)
   };
 
   render() {
@@ -33,15 +38,13 @@ class Home extends Component {
         <div >
           <div>
             <Scheduler/>
-            <div className="d-flex flex-row">
-              <ReunionsLists lista ={this.state.reunions}/>
-            </div>
+          <div className="d-flex flex-row">
+            <ReunionsLists lista ={this.state.reunions}/>
           </div>
-          <div>
+        </div>
             <div className="d-flex flex-row">
               <ActivityLists lista ={this.state.activities}/>
             </div>
-          </div>
         </div>
     );
   }
